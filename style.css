@@ -1,0 +1,40 @@
+*{
+    
+    box-sizing: border-box;
+}
+body{
+    background-color: darkslategrey;
+    color: cornsilk;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    
+}
+i{
+    font-size: 30px;
+}
+h1{
+    color:cornflowerblue;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+table{
+    border-spacing: 0px;
+    border: ridge rgb(225, 111, 59) 5px;
+    box-sizing: content-box;
+}
+th{
+    height: 50px;
+    width: 50px;
+}
+.odd{
+    background-color: rgb(46, 134, 46);
+   
+}
+.even{
+    background-color: rgba(255, 205, 43, 0.777);
+  
+}
