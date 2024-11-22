@@ -1,11 +1,12 @@
 /*
-this code fullly written by Ak & its copyright... 
+this code fullly written by Ak & its copyright :)... 
 */
 
-let bp = [];
+let bp = [],str,strl = '',strl1= '';
 let bpc = 16,wpc = 16;
 let token = [];
-let pec = [];
+let blc = [],whc=[];
+let pec = ['b'];
 let bl = ['g1', 'g2', 'g3', 'g4', 'g5', 'g6', 'g7', 'g8', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'h7', 'h8'];
 let wh = ['a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7', 'b8'];
 let s, z, p, n = 1, t, c, position;
@@ -30,6 +31,11 @@ let e1e = document.getElementById(e1), e2e = document.getElementById(e2), e3e = 
 let f1e = document.getElementById(f1), f2e = document.getElementById(f2), f3e = document.getElementById(f3), f4e = document.getElementById(f4), f5e = document.getElementById(f5), f6e = document.getElementById(f6), f7e = document.getElementById(f7), f8e = document.getElementById(f8);
 let g1e = document.getElementById(g1), g2e = document.getElementById(g2), g3e = document.getElementById(g3), g4e = document.getElementById(g4), g5e = document.getElementById(g5), g6e = document.getElementById(g6), g7e = document.getElementById(g7), g8e = document.getElementById(g8);
 let h1e = document.getElementById(h1), h2e = document.getElementById(h2), h3e = document.getElementById(h3), h4e = document.getElementById(h4), h5e = document.getElementById(h5), h6e = document.getElementById(h6), h7e = document.getElementById(h7), h8e = document.getElementById(h8);
+
+let whcb = document.getElementById('wh');
+let blcb = document.getElementById('bl');
+
+
 let bp1 = document.createElement("i");
 bp1.setAttribute("class", "fa-solid fa-chess-pawn");
 bp1.style.color = '#403f3f';
@@ -173,7 +179,14 @@ let g1l = ['b', bp1], g2l = ['b', bp2], g3l = ['b', bp3], g4l = ['b', bp4], g5l 
 let h1l = ['b', br1], h2l = ['b', bk1], h3l = ['b', bb1], h4l = ['b', bq], h5l = ['b', bk], h6l = ['b', bb2], h7l = ['b', bk2], h8l = ['b', br2];
 
 
-
+function changer(){
+    if(pec.includes('b')){
+        pec=['w'];
+    }
+    else{
+        pec=['b'];
+    }
+}
 
 function tog(position) {
     if (bp.includes[position]) {
@@ -1042,93 +1055,198 @@ function rem(ele, pec) {
     }
 }
 function bxevents(idx, ls, eve, c) {
-    tog(idx);
-    a = idx[0];
-    n = parseInt(idx[1]);
-    if (!token.includes(idx)) {
-        console.log("clg");
-        token = [];
-        pec = [];
-        if (bl.length > bpc) {
-            bl.pop();
-        }
-        if (wh.length > wpc) {
-            wh.pop();
-        }
-    }
-    if (token.includes(idx)) {
-        // console.log(pec[0]);
-        // console.log(ls[0]);
-        if(ls.length!=0){
-            if(pec[0] != ls[0]){
-                
-                console.log(eve);
-                ls[1].remove();
-                ls.length=0;
-                if(pec=='b'){
-                    rem(idx,'w');
-                    wpc--;
-                }
-                if(pec=='w'){
-                    rem(idx,'b');
-                    bpc--;
-                }
+    if((pec=='b' && bl.includes(idx)) || bp.includes(idx)){
+        tog(idx);
+        a = idx[0];
+        n = parseInt(idx[1]);
+        if (!token.includes(idx)) {
+            console.log("clg");
+            token = [];
+            pec = [];
+            if (bl.length > bpc) {
+                bl.pop();
+            }
+            if (wh.length > wpc) {
+                wh.pop();
             }
         }
-        eve.append(token[token.length - 2]);
-        ls.push(token[token.length - 1][0]);
-        console.log(token[token.length - 1][0],'nk');
-        ls.push(token[token.length - 2]);
-        console.log(token[token.length - 2],'mk');
-        console.log(ls);
-        token[token.length - 1].length = 0;
-        token = [];
-        if (pec.includes('b')) {
-            rem(bl[bl.length - 1], 'b');
-            bl.push(idx);
+        if (token.includes(idx)) {
+            // console.log(pec[0]);
+            // console.log(ls[0]);
+            if(ls.length!=0){
+                if(pec[0] != ls[0]){
+                    console.log(eve,'eeesss');
+                    jd = ls[ls.length - 1];
+                    str = `${jd.outerHTML}`;
+                    if(pec=='b'){
+                        rem(idx,'w');
+                        wpc--;
+                        whc.push(ls[1]);
+                        strl = strl + str;
+                        whcb.innerHTML= strl;
+
+                    }
+                    if(pec=='w'){
+                        rem(idx,'b');
+                        bpc--;
+                        blc.push(ls[1]);
+                        strl1 = strl1 + str;
+                        blcb.innerHTML= strl1;
+                    }
+                    ls[1].remove();
+                    ls.length=0;
+                    
+                }
+            }
+            eve.append(token[token.length - 2]);
+            ls.push(token[token.length - 1][0]);
+            console.log(token[token.length - 1][0],'nk');
+            ls.push(token[token.length - 2]);
+            console.log(token[token.length - 2],'mk');
+            console.log(ls);
+            token[token.length - 1].length = 0;
+            token = [];
+            if (pec.includes('b')) {
+                rem(bl[bl.length - 1], 'b');
+                bl.push(idx);
+            }
+            else if (pec.includes('w')) {
+                rem(wh[wh.length - 1], 'w');
+                wh.push(idx);
+            }
+            changer()
         }
-        else if (pec.includes('w')) {
-            rem(wh[wh.length - 1], 'w');
-            wh.push(idx);
+        else if (ls.includes(bp1) ||
+            ls.includes(bp2) ||
+            ls.includes(bp3) ||
+            ls.includes(bp4) ||
+            ls.includes(bp5) ||
+            ls.includes(bp6) ||
+            ls.includes(bp7) ||
+            ls.includes(bp8)) {
+            handler(a, n, ls, c = 'bp');
+        }
+        else if (ls.includes(wp1) ||
+            ls.includes(wp2) ||
+            ls.includes(wp3) ||
+            ls.includes(wp4) ||
+            ls.includes(wp5) ||
+            ls.includes(wp6) ||
+            ls.includes(wp7) ||
+            ls.includes(wp8)) {
+            handler(a, n, ls, c = 'wp');
+        }
+        else if (ls.includes(bk1) || ls.includes(bk2) || ls.includes(wk1) || ls.includes(wk2)) {
+            handler(a, n, ls, c = 'knight');
+        }
+        else if (ls.includes(br1) || ls.includes(br2) || ls.includes(wr1) || ls.includes(wr2)) {
+            handler(a, n, ls, c = 'rook');
+        }
+        else if (ls.includes(bb1) || ls.includes(bb2) || ls.includes(wb1) || ls.includes(wb2)) {
+            handler(a, n, ls, c = 'bishop');
+        }
+        else if (ls.includes(bq) || ls.includes(wq)) {
+            handler(a, n, ls, c = 'queen');
+        }
+        else if (ls.includes(bk) || ls.includes(wk)) {
+            handler(a, n, ls, c = 'king');
+        }
+        else {
+            token = [];
         }
     }
-    else if (ls.includes(bp1) ||
-        ls.includes(bp2) ||
-        ls.includes(bp3) ||
-        ls.includes(bp4) ||
-        ls.includes(bp5) ||
-        ls.includes(bp6) ||
-        ls.includes(bp7) ||
-        ls.includes(bp8)) {
-        handler(a, n, ls, c = 'bp');
-    }
-    else if (ls.includes(wp1) ||
-        ls.includes(wp2) ||
-        ls.includes(wp3) ||
-        ls.includes(wp4) ||
-        ls.includes(wp5) ||
-        ls.includes(wp6) ||
-        ls.includes(wp7) ||
-        ls.includes(wp8)) {
-        handler(a, n, ls, c = 'wp');
-    }
-    else if (ls.includes(bk1) || ls.includes(bk2) || ls.includes(wk1) || ls.includes(wk2)) {
-        handler(a, n, ls, c = 'knight');
-    }
-    else if (ls.includes(br1) || ls.includes(br2) || ls.includes(wr1) || ls.includes(wr2)) {
-        handler(a, n, ls, c = 'rook');
-    }
-    else if (ls.includes(bb1) || ls.includes(bb2) || ls.includes(wb1) || ls.includes(wb2)) {
-        handler(a, n, ls, c = 'bishop');
-    }
-    else if (ls.includes(bq) || ls.includes(wq)) {
-        handler(a, n, ls, c = 'queen');
-    }
-    else if (ls.includes(bk) || ls.includes(wk)) {
-        handler(a, n, ls, c = 'king');
-    }
-    else {
-        token = [];
+    if((pec=='w' && wh.includes(idx)) || bp.includes(idx)){
+        tog(idx);
+        a = idx[0];
+        n = parseInt(idx[1]);
+        if (!token.includes(idx)) {
+            console.log("clg");
+            token = [];
+            pec = [];
+            if (bl.length > bpc) {
+                bl.pop();
+            }
+            if (wh.length > wpc) {
+                wh.pop();
+            }
+        }
+        if (token.includes(idx)) {
+            // console.log(pec[0]);
+            // console.log(ls[0]);
+            if(ls.length!=0){
+                if(pec[0] != ls[0]){
+                    console.log(eve);
+                    if(pec=='b'){
+                        rem(idx,'w');
+                        wpc--;
+                        whc.push(ls[1]);
+                    }
+                    if(pec=='w'){
+                        rem(idx,'b');
+                        bpc--;
+                        blc.push(ls[1]);
+                    }
+                    ls[1].remove();
+                    ls.length=0;
+                    
+                }
+            }
+            eve.append(token[token.length - 2]);
+            ls.push(token[token.length - 1][0]);
+            console.log(token[token.length - 1][0],'nk');
+            ls.push(token[token.length - 2]);
+            console.log(token[token.length - 2],'mk');
+            console.log(ls);
+            token[token.length - 1].length = 0;
+            token = [];
+            if (pec.includes('b')) {
+                rem(bl[bl.length - 1], 'b');
+                bl.push(idx);
+            }
+            else if (pec.includes('w')) {
+                rem(wh[wh.length - 1], 'w');
+                wh.push(idx);
+            }
+            changer();
+        }
+        else if (ls.includes(bp1) ||
+            ls.includes(bp2) ||
+            ls.includes(bp3) ||
+            ls.includes(bp4) ||
+            ls.includes(bp5) ||
+            ls.includes(bp6) ||
+            ls.includes(bp7) ||
+            ls.includes(bp8)) {
+            handler(a, n, ls, c = 'bp');
+        }
+        else if (ls.includes(wp1) ||
+            ls.includes(wp2) ||
+            ls.includes(wp3) ||
+            ls.includes(wp4) ||
+            ls.includes(wp5) ||
+            ls.includes(wp6) ||
+            ls.includes(wp7) ||
+            ls.includes(wp8)) {
+            handler(a, n, ls, c = 'wp');
+        }
+        else if (ls.includes(bk1) || ls.includes(bk2) || ls.includes(wk1) || ls.includes(wk2)) {
+            handler(a, n, ls, c = 'knight');
+        }
+        else if (ls.includes(br1) || ls.includes(br2) || ls.includes(wr1) || ls.includes(wr2)) {
+            handler(a, n, ls, c = 'rook');
+        }
+        else if (ls.includes(bb1) || ls.includes(bb2) || ls.includes(wb1) || ls.includes(wb2)) {
+            handler(a, n, ls, c = 'bishop');
+        }
+        else if (ls.includes(bq) || ls.includes(wq)) {
+            handler(a, n, ls, c = 'queen');
+        }
+        else if (ls.includes(bk) || ls.includes(wk)) {
+            handler(a, n, ls, c = 'king');
+        }
+        else {
+            token = [];
+        }
     }
 }
 
