@@ -38,3 +38,25 @@ th{
     background-color: rgba(255, 205, 43, 0.777);
   
 }
+#col{
+    margin-top: 5px;
+    display: flex;
+    flex-direction: row;
+    height: 80px;
+    width: 400px;
+    gap: 6px;
+
+}
+.col{
+    display: flex;
+    flex-wrap: wrap;
+    background: radial-gradient(circle, rgba(255, 160, 59, 0.777), rgba(255, 104, 34, 0.777));
+    height: 80px;
+    width: 200px;
+    border-spacing: 4px;
+    border: ridge rgb(134, 225, 59) 5px;
+    
+}
+#bl{
+    flex-direction: row-reverse;
+}
