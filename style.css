@@ -22,6 +22,7 @@ h1{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 table{
+    margin-left: 0px;
     border-spacing: 0px;
     border: ridge rgb(225, 111, 59) 5px;
     box-sizing: content-box;
