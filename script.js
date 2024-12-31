@@ -2,11 +2,13 @@
 this code fullly written by Ak & its copyright :)... 
 */
 
-let bp = [],str,strl = '',strl1= '';
-let bpc = 16,wpc = 16;
-let token = [];
-let blc = [],whc=[];
+let flag=false,flag1=false;
+let bp = [], str, strl = '', strl1 = '';
+let bpc = 16, wpc = 16, kcpb, kcpw;
+let token = [], checkpathl = [],token1=[];
+let blc = [], whc = [];
 let pec = ['b'];
+let restrictw = [],restrictb = [];
 let bl = ['g1', 'g2', 'g3', 'g4', 'g5', 'g6', 'g7', 'g8', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'h7', 'h8'];
 let wh = ['a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7', 'b8'];
 let s, z, p, n = 1, t, c, position;
@@ -20,8 +22,9 @@ let g1 = 'g1', g2 = 'g2', g3 = 'g3', g4 = 'g4', g5 = 'g5', g6 = 'g6', g7 = 'g7',
 let h1 = 'h1', h2 = 'h2', h3 = 'h3', h4 = 'h4', h5 = 'h5', h6 = 'h6', h7 = 'h7', h8 = 'h8';
 
 
-
+let temp1;
 let sel = g1;
+let checker;
 
 let a1e = document.getElementById(a1), a2e = document.getElementById(a2), a3e = document.getElementById(a3), a4e = document.getElementById(a4), a5e = document.getElementById(a5), a6e = document.getElementById(a6), a7e = document.getElementById(a7), a8e = document.getElementById(a8);
 let b1e = document.getElementById(b1), b2e = document.getElementById(b2), b3e = document.getElementById(b3), b4e = document.getElementById(b4), b5e = document.getElementById(b5), b6e = document.getElementById(b6), b7e = document.getElementById(b7), b8e = document.getElementById(b8);
@@ -169,6 +172,8 @@ wr2.setAttribute("class", "fa-solid fa-chess-rook");
 wr2.style.color = "#ffffffe1";
 a8e.append(wr2);
 
+let wkc = [], bkc = [], d = [];
+
 let a1l = ['w', wr1], a2l = ['w', wk1], a3l = ['w', wb1], a4l = ['w', wq], a5l = ['w', wk], a6l = ['w', wb2], a7l = ['w', wk2], a8l = ['w', wr2];
 let b1l = ['w', wp1], b2l = ['w', wp2], b3l = ['w', wp3], b4l = ['w', wp4], b5l = ['w', wp5], b6l = ['w', wp6], b7l = ['w', wp7], b8l = ['w', wp8];
 let c1l = [], c2l = [], c3l = [], c4l = [], c5l = [], c6l = [], c7l = [], c8l = [];
@@ -177,15 +182,515 @@ let e1l = [], e2l = [], e3l = [], e4l = [], e5l = [], e6l = [], e7l = [], e8l = 
 let f1l = [], f2l = [], f3l = [], f4l = [], f5l = [], f6l = [], f7l = [], f8l = [];
 let g1l = ['b', bp1], g2l = ['b', bp2], g3l = ['b', bp3], g4l = ['b', bp4], g5l = ['b', bp5], g6l = ['b', bp6], g7l = ['b', bp7], g8l = ['b', bp8];
 let h1l = ['b', br1], h2l = ['b', bk1], h3l = ['b', bb1], h4l = ['b', bq], h5l = ['b', bk], h6l = ['b', bb2], h7l = ['b', bk2], h8l = ['b', br2];
+let ls=[];
+let temp;
+checkb(a = 'a', n = 5, c = 'w');
+checkb(a = 'h', n = 5, c = 'b');
+function changer() {
+    if (pec.includes('b')) {
+        pec = ['w'];
+    }
+    else {
+        pec = ['b'];
+    }
+}
+function restriction(kcp){    
+    if(kcp==kcpw){
+        restrictw=[];
+        temp = pec;
+        pec=['b']
+        for(let i=0;i<bl.length;++i) {
+            let idxe = bl[i].toString();
+            let id = idxe+"l";
+            console.log("var",id,idxe,i,wh.length);
+            let ls;
+            try {
+                ls = eval(id); // Unsafe; use only if necessary
+                // //console.log("Variable:", ls);
+            } catch (e) {
+                console.error(`Variable ${id} is not defined.`);
+            }
+            // //console.log("lslslsls",ls);
+            a=idxe[0];
+            n=parseInt(idxe[1]);
+            console.log(a,n,"klopio");
 
+            if(ls[1]==bq){
+                bqs(a,n);
+                console.log(idxe,"bq");
+            }      
+            else if(ls[1]==bb1||ls[1]==bb2){
+                bbs(a,n);
+                console.log(idxe,"bbs");
+            }
+            else if(ls[1]==br1||ls[1]==br2){
+                brs(a,n);
+                console.log(idxe,"brs");
+            }
+            else if(ls[1]==bk1||ls[1]==bk2){
+                bkns(a,n);
+                console.log(idxe,"bks");
+            }
+            else if(ls[1]==bk){
+                bks(a,n);
+            }
+            else{
+                    pawnq(a,n,'b');
+            }
+            for(j=0;j<bp.length;++j){
+                restrictw.push(bp[j]);
+            }
+            // //console.log(bp,"bpnpnl");
+            
+            
+            bp=[];
+        }
+        pec = temp;
+        restrictw = restrictw.filter((value, index, self) => self.indexOf(value) === index);
+        console.log(restrictw,"restricttion w");
+    }
+    if(kcp==kcpb){
+        restrictb=[];
+        temp = pec;
+        pec=['w']
+        for(let i=0;i<wh.length;++i) {
+            let idxe = wh[i].toString();
+            let id = idxe+"l";
+            console.log("var",id,idxe,i,wh.length);
+            let ls;
+            try {
+                ls = eval(id); // Unsafe; use only if necessary
+                // //console.log("Variable:", ls);
+            } catch (e) {
+                console.error(`Variable ${id} is not defined.`);
+            }
+            // //console.log("lslslsls",ls);
+            a=idxe[0];
+            n=parseInt(idxe[1]);
+            // //console.log(a,n,"klopio");
 
-function changer(){
-    if(pec.includes('b')){
-        pec=['w'];
+            if(ls[1]==wq){
+                bqs(a,n);
+                // //console.log(idxe,"wq");
+            }      
+            else if(ls[1]==wb1||ls[1]==wb2){
+                bbs(a,n);
+                // //console.log(idxe,"wqb");
+            }
+            else if(ls[1]==wr1||ls[1]==wr2){
+                brs(a,n);
+                // //console.log(idxe,"brs");
+            }
+            else if(ls[1]==wk1||ls[1]==wk2){
+                bkns(a,n);
+                // //console.log(idxe,"bks");
+            }
+            else if(ls[1]==wk){
+                bks(a,n);
+            }
+            else{
+                pawnq(a,n,'w');
+            }
+            for(j=0;j<bp.length;++j){
+                restrictb.push(bp[j]);
+            }
+            // //console.log(bp,"bpnpnl");
+            
+            
+            bp=[];
+        }
+        pec = temp;
+        restrictb = restrictb.filter((value, index, self) => self.indexOf(value) === index);
+        console.log(restrictb,"restricttion b");
+    }
+}
+function checkhandler(idx,kcp){
+    checker = idx;
+    temp1 = kcp;
+    document.getElementById(checker).style.boxShadow="inset 0px 0px 10px blue";
+    // document.getElementById(checker).style.boxSizing = "border-box";
+    document.getElementById(kcp).style.boxShadow=" inset 0px 0px 20px red";
+    // document.getElementById(kcp).style.boxSizing = "border-box";
+    bp=[];
+    // //console.log(pec[0]=='w',pec[0]=='b');
+    if(pec[0]=='b'){
+        flag=true;
+        changer();
+        for(let i=0;i<wh.length;++i) {
+            let idxe =wh[i].toString();
+            let id = idxe+"l";
+            // console.log("var",id,idxe,i,wh.length);
+            let ls;
+            try {
+                ls = eval(id); // Unsafe; use only if necessary
+                // //console.log("Variable:", ls);
+            } catch (e) {
+                console.error(`Variable ${id} is not defined.`);
+            }
+            //console.log("lslslsls",ls);
+            a=idxe[0];
+            n=parseInt(idxe[1]);
+            //console.log(a,n,"klopio");
+
+            if(ls[1]==wq){
+                bqs(a,n);
+                //console.log(idxe,"bq");
+            }      
+            else if(ls[1]==wb1||ls[1]==wb2){
+                bbs(a,n);
+                //console.log(idxe,"bbs");
+            }
+            else if(ls[1]==wr1||ls[1]==wr2){
+                brs(a,n);
+                //console.log(idxe,"brs");
+            }
+            else if(ls[1]==wk1||ls[1]==wk2){
+                bkns(a,n);
+                //console.log(idxe,"bks");
+            }
+            else if(ls[1]==wk){
+                bks(a,n);
+                for(j=0;j<bp.length;++j){
+                    if(!(checkpathl.includes(bp[j]))){
+                        flag1=true;
+                        break;
+                    }
+                    if(flag1){
+                        token1.push(idxe);
+                        flag1=false;
+                    }
+                    
+                }
+
+                console.log(bp,"black king");
+            }
+            else{
+                if(a=="b"){
+                    //console.log(idxe,"lkjh");
+                    wpis(a,n);
+                }
+                else if(ls[1]!=wk){
+                    //console.log(idxe,"lkjqh");
+                    wpss(a,n);
+                }
+            }
+            
+
+            //console.log(bp,"bpnpnl");
+            for(j=0;j<bp.length;++j){
+                if(checkpathl.includes(bp[j])){
+                    flag1=true;
+                    break;
+                }
+            }
+            if(flag1){
+                token1.push(idxe);
+                console.log("tokennn",token1);
+            }
+            bp=[];
+            flag1=false;
+            
+        }
+        changer();
+    }
+    else if(pec[0]=='w'){
+        changer();
+        for(let i=0;i<bl.length;++i) {
+            let idxe = bl[i].toString();
+            let id = idxe+"l";
+            //console.log("var",id,idxe,i,wh.length);
+            let ls;
+            try {
+                ls = eval(id); // Unsafe; use only if necessary
+                // //console.log("Variable:", ls);
+            } catch (e) {
+                console.error(`Variable ${id} is not defined.`);
+            }
+            //console.log("lslslsls",ls);
+            a=idxe[0];
+            n=parseInt(idxe[1]);
+            //console.log(a,n,"klopio");
+
+            if(ls[1]==bq){
+                bqs(a,n);
+                //console.log(idxe,"bq");
+            }      
+            else if(ls[1]==bb1||ls[1]==bb2){
+                bbs(a,n);
+                //console.log(idxe,"bbs");
+            }
+            else if(ls[1]==br1||ls[1]==br2){
+                brs(a,n);
+                //console.log(idxe,"brs");
+            }
+            else if(ls[1]==bk1||ls[1]==bk2){
+                bkns(a,n);
+                //console.log(idxe,"bks");
+            }
+            else if(ls[1]==bk){
+                bks(a,n);
+                for(j=0;j<bp.length;++j){
+                    if(!(checkpathl.includes(bp[j]))){
+                        flag1=true;
+                        break;
+                    }
+                    if(flag1){
+                        token1.push(idxe);
+                        flag1=false;
+                    }
+                    
+                }
+                console.log(bp,"white king");
+            }
+            else{
+                if(a=="g"){
+                    //console.log(idxe,"lkjh");
+                    bpis(a,n);
+                }
+                else if(ls[1]!=bk){
+                    //console.log(idxe,"lkjqh");
+                    bpss(a,n);
+                }
+            }
+
+            //console.log(bp,"bpnpnl");
+            for(j=0;j<bp.length;++j){
+                if(checkpathl.includes(bp[j])){
+                    flag1=true;
+                    break;
+                }
+            }
+            if(flag1){
+                token1.push(idxe);
+                flag=true;
+                console.log("tokennn",token1);
+            }
+            bp=[];
+            flag1=false;
+            
+
+        }
+        changer();
+    }
+}
+
+function checkremover(a,n){
+    let rdf = a+n;
+    if(token1.includes(rdf)){
+        // flag=false;
+        // token1=[];
+        return true;
     }
     else{
-        pec=['b'];
+        return false;
     }
+
+}
+function checkremoverd(kcp,checker){
+    console.log('hjer',kcp,checker);
+    document.getElementById(checker).style.boxShadow="inset 0px 0px 0px blue";
+    // document.getElementById(checker).style.boxSizing = "border-box";
+    document.getElementById(kcp).style.boxShadow=" inset 0px 0px 0px red";
+    // document.getElementById(kcp).style.boxSizing = "border-box";`
+    bp=[];
+    // checker='';
+    checkpathl=[];
+}
+
+function checkb(a, n, pec) {
+    //white king
+    //console.log("jio", a, n, pec, pec[0] == 'w', pec[0] == 'b');
+    if (pec[0] == 'w') {
+        //console.log("nj");
+        kcpw = a + n;//discriibes kings palce
+        //console.log("nj1", a, n, kcpw);
+        // restriction(kcpb);
+        kc(a, n);
+        wkc = bp;
+        bp = [];
+    }
+    //black king
+    if (pec[0] == 'b') {
+        kcpb = a + n;//discriibes kings palce
+        // restriction(kcpw);
+        kc(a, n);
+        bkc = bp;
+        bp = [];
+        //console.log("nj2", a, n, kcpw);
+    }
+}
+function checkpath(idx, kcp) {
+    let checker_a = idx[0].charCodeAt();
+    let checker_n = parseInt(idx[1]);
+    let kcp_a = kcp[0].charCodeAt();
+    let kcp_n = parseInt(kcp[1]);
+    //console.log("here chekcj", checker_a, checker_n, kcp_a, kcp_n);
+    if (checker_a > kcp_a && checker_n < kcp_n) {
+        for (i = checker_a; i > kcp_a; i--) {
+            checkpathl.push(String.fromCharCode(i) + (Math.abs(checker_n - (i - (checker_a )))));
+            //console.log("here chekc1", checkpathl);
+        }
+    }
+    else if (checker_a < kcp_a && checker_n > kcp_n) {//can be modify
+        for (i = checker_a ; i < kcp_a; i++) {
+            checkpathl.push(String.fromCharCode(i) + (Math.abs(checker_n - (i - (checker_a )))));
+            //console.log("here chekc2", checkpathl);
+        }
+    }
+    else if (checker_a < kcp_a && checker_n < kcp_n) {// can be modify
+        for (i = checker_a ; i < kcp_a; i++) {
+            checkpathl.push(String.fromCharCode(i) + (Math.abs(checker_n + (i - (checker_a )))));
+            //console.log("here chekc3", checkpathl);
+        }
+    }
+    else if (checker_a > kcp_a && checker_n > kcp_n) {
+        for (i = checker_a ; i > kcp_a; i--) {
+            checkpathl.push(String.fromCharCode(i) + (Math.abs(checker_n - Math.abs(i - (checker_a )))));
+            //console.log("here chekc4", checkpathl);
+        }
+    }
+    else if(checker_a > kcp_a && checker_n==kcp_n){
+        for (i = checker_a ; i > kcp_a; i--) {
+            checkpathl.push(String.fromCharCode(i) + checker_n);
+            //console.log("here chekc5", checkpathl);
+        }
+    }
+    else if(checker_a < kcp_a && checker_n==kcp_n){
+        for (i = checker_a ; i < kcp_a; i++) {
+            checkpathl.push(String.fromCharCode(i) + checker_n);
+            //console.log("here chekc6", checkpathl);
+        }
+    }
+    else if(checker_a == kcp_a && checker_n < kcp_n){
+        for (i = checker_n ; i < kcp_n; i++) {
+            checkpathl.push(String.fromCharCode(checker_a) + (checker_n+(i-checker_n)));
+            //console.log("here chekc7", checkpathl);
+        }
+    }
+    else if(checker_a == kcp_a && checker_n > kcp_n){
+        for (i = checker_n ; i > kcp_n; i--) {
+            checkpathl.push(String.fromCharCode(checker_a) + (checker_n-Math.abs(checker_n-i)));
+            //console.log("here chekc8", checkpathl);
+        }
+    }
+}
+function kc(a, n) {
+    a = a.charCodeAt();
+    for (let i = 0; i < 8; i++) {
+        for (let j = 0; j < 8; j++) {
+            if (i == 0) {
+                if ((n + j + 1) < 9 && (a + j + 1) < 105) {
+                    z = String.fromCharCode(a + j + 1);
+                    s = z + (n + j + 1);
+                    bp.push(s);
+                }
+            }
+            else if (i == 1) {
+                if ((n + j + 1) < 9) {
+                    z = String.fromCharCode(a);
+                    s = z + (n + j + 1);
+                    bp.push(s);
+                }
+            }
+            else if (i == 2) {
+                if ((n - j - 1) > 0 && (a - j - 1) > 96) {
+                    z = String.fromCharCode(a - j - 1);
+                    s = z + (n - j - 1);
+                    bp.push(s);
+                }
+            }
+            else if (i == 3) {
+                if ((n - j - 1) > 0) {
+                    z = String.fromCharCode(a);
+                    s = z + (n - j - 1);
+                    bp.push(s);
+                }
+            }
+            else if (i == 4) {
+                if ((a - j - 1) > 96 && (n + j + 1) < 9) {
+                    z = String.fromCharCode(a - j - 1);
+                    s = z + (n + j + 1);
+                    bp.push(s);
+                }
+            }
+            else if (i == 5) {
+                if ((a - j - 1) > 96) {
+                    z = String.fromCharCode(a - j - 1);
+                    s = z + n;
+                    bp.push(s);
+                }
+            }
+            else if (i == 6) {
+                if ((a + j + 1) < 105 && (n - j - 1) > 0) {
+                    z = String.fromCharCode(a + j + 1);
+                    s = z + (n - j - 1);
+                    bp.push(s);
+                }
+            }
+            else {
+                if ((a + j + 1) < 105) {
+                    z = String.fromCharCode(a + j + 1);
+                    s = z + n;
+                    bp.push(s);
+                }
+            }
+        }
+    }
+    for (let i = 0; i < 4; ++i) {
+        if (i == 0) {
+            if ((a + 2) < 105 && (n - 1) > 0) {
+                z = String.fromCharCode(a + 2);
+                s = z + (n - 1);
+                collison(ck = 'kn');
+
+            }
+            if ((a + 2) < 105 && (n + 1) < 9) {
+                z = String.fromCharCode(a + 2);
+                s = z + (n + 1);
+                collison(ck = 'kn');
+            }
+
+        }
+        else if (i == 1) {
+            if ((a - 1) > 96 && (n - 2) > 0) {
+                z = String.fromCharCode(a - 1);
+                s = z + (n - 2);
+                collison(ck = 'kn');
+            }
+            if ((a + 1) < 105 && (n - 2) > 0) {
+                z = String.fromCharCode(a + 1);
+                s = z + (n - 2);
+                collison(ck = 'kn');
+            }
+        }
+        else if (i == 2) {
+            if ((a - 1) > 96 && (n + 2) < 9) {
+                z = String.fromCharCode(a - 1);
+                s = z + (n + 2);
+                collison(ck = 'kn');
+            }
+            if ((a + 1) < 105 && (n + 2) < 9) {
+                z = String.fromCharCode(a + 1);
+                s = z + (n + 2);
+                collison(ck = 'kn');
+            }
+        }
+        else {
+            if ((a - 2) > 96 && (n - 1) > 0) {
+                z = String.fromCharCode(a - 2);
+                s = z + (n - 1);
+                collison(ck = 'kn');
+            }
+            if ((a - 2) > 96 && (n + 1) < 9) {
+                z = String.fromCharCode(a - 2);
+                s = z + (n + 1);
+                collison(ck = 'kn');
+            }
+
+        }
+    }
+
+
 }
 
 function tog(position) {
@@ -195,7 +700,7 @@ function tog(position) {
         document.getElementById(sel).style.border = "solid 0px white";
         document.getElementById(sel).style.boxSizing = "border-box";
         for (i = 0; i < bp.length; i++) {
-            console.log(bp[i]);
+            //console.log(bp[i]);
             document.getElementById(bp[i]).style.border = "solid 0px cyan";
             document.getElementById(bp[i]).style.boxSizing = "border-box";
         }
@@ -204,82 +709,113 @@ function tog(position) {
     }
 }
 function collison(ck) {
-    if (ck=='rk' || ck=='bs') {
+    //console.log(pec,"pecx");
+    if (ck == 'rk' || ck == 'bs') {
         if (pec.includes('b')) {
             if (!bl.includes(s)) {
-                console.log(s);
+                //console.log(s);
                 bp.push(s);
+                //console.log("here col",bp);
                 bp.push('enm');
             }
         }
         else if (pec.includes("w")) {
             if (!wh.includes(s)) {
-                console.log(s);
+                //console.log(s);
                 bp.push(s);
-                bp.push('enm');
-            }
-        }
-    }
-    else if(ck == "kn" ){
-        if (pec.includes('b')) {
-            if (!bl.includes(s)) {
-                console.log(s);
-                bp.push(s);
-                if(wh.includes(s)){bp.push('enm');}
-            }
-        }
-        else if (pec.includes("w")) {
-            if (!wh.includes(s)) {
-                console.log(s);
-                bp.push(s);
-                if(wh.includes(s)){bp.push('enm');}
-            }
-        }
-    }
-    else if(ck=='p'){
-        if(pec.includes('b')){
-            for(i=bp.length-2;i<bp.length;++i){
-                if(bp[i]=='enm'){
-                    i=i+1;
-                }
-                if(wh.includes(bp[i])){
-                    bp.splice(i+1,0,'enm');
-                    
-                }
-                if(!wh.includes(bp[i])){
-                    bp.splice(i,1);
-                    i=i-1;
-                }
                 
+                bp.push('enm');
             }
         }
-        else if(pec.includes('w')){
-            for(i=bp.length-2;i<bp.length;++i){
-                console.log(bp);
-                if(bp[i]=='enm'){
-                    i=i+1;
+    }
+    else if (ck == "kn") {
+        if (pec.includes('b')) {
+            if (!bl.includes(s)) {
+                //console.log(s);
+                bp.push(s);
+                if (wh.includes(s)) { bp.push('enm'); }
+            }
+        }
+        else if (pec.includes("w")) {
+            if (!wh.includes(s)) {
+                //console.log(s);
+                bp.push(s);
+                if (wh.includes(s)) { bp.push('enm'); }
+            }
+        }
+    }
+    else if (ck == 'p') {
+        if (pec.includes('b')) {
+            for (i = bp.length - 2; i < bp.length; ++i) {
+                if (bp[i] == 'enm') {
+                    i = i + 1;
                 }
-                if(bl.includes(bp[i])){
-                    bp.splice(i+1,0,'enm');
+                if (wh.includes(bp[i])) {
+                    bp.splice(i + 1, 0, 'enm');
+
                 }
-                if(!bl.includes(bp[i])){
-                    bp.splice(i,1);
-                    i=i-1;
+                if (!wh.includes(bp[i])) {
+                    bp.splice(i, 1);
+                    i = i - 1;
+                }
+
+            }
+        }
+        else if (pec.includes('w')) {
+            for (i = bp.length - 2; i < bp.length; ++i) {
+                //console.log(bp);
+                if (bp[i] == 'enm') {
+                    i = i + 1;
+                }
+                if (bl.includes(bp[i])) {
+                    bp.splice(i + 1, 0, 'enm');
+                }
+                if (!bl.includes(bp[i])) {
+                    bp.splice(i, 1);
+                    i = i - 1;
                 }
             }
         }
     }
 
 }
+function pawnq(a,n,rd){
+    a=(a.charCodeAt());
+    if(rd=='b'){
+        console.log("here b",(a - 1) > 96 && (a+1) < 105);
+        if ((a - 1) > 96 && (a+1) < 105){
+            if((n - 1) >= 1){
+                bp.push(String.fromCharCode(a-1)+(n-1));
+            }
+            
+            if((n + 1) <= 8){
+                bp.push(String.fromCharCode(a-1)+(n+1));
+            }
+        }
+    }
+    else{
+        console.log("here w",(a - 1) > 96 && (a+1) < 105);
+        if ((a - 1) > 96 && (a+1) < 105){
+            if((n - 1) >= 1){
+                bp.push(String.fromCharCode(a+1)+(n-1));
+            }
+            
+            if((n + 1) <= 8){
+                bp.push(String.fromCharCode(a+1)+(n+1));
+            }
+        }
+    }
+}
 function bpis(a, n) {
     a = a.charCodeAt();
     for (let i = 1; i <= 2; ++i) {
         z = String.fromCharCode(a - i);
         s = z + n;
-        if(i==1){
-            bp.push(z + (n-1));
-            bp.push(z + (n+1));
-            collison('p');  
+        if (i == 1) {
+            bp.push(z + (n - 1));
+            bp.push(z + (n + 1));
+            
+            collison('p');
         }
         if (!bl.includes(s) && !wh.includes(s)) {
             bp.push(s);
@@ -289,6 +825,7 @@ function bpis(a, n) {
         }
     }
     
+
 }
 function bpss(a, n) {
     a = a.charCodeAt();
@@ -296,8 +833,8 @@ function bpss(a, n) {
         z = String.fromCharCode(a - i);
         s = z + n;
         if (!bl.includes(s) && !wh.includes(s)) {
-            if(n>=1 && n<=8 && (a-i)>96 && a<105){
-                console.log(s);
+            if (n >= 1 && n <= 8 && (a - i) > 96 && a < 105) {
+                //console.log(s);
                 bp.push(s);
             }
         }
@@ -305,24 +842,25 @@ function bpss(a, n) {
             break;
         }
     }
-    if((n-1)>=1 && (n+1)<=8 && (a-i)>96 && a<105){
-        bp.push(z + (n-1));
-        bp.push(z + (n+1));
+    if ((n - 1) >= 0 && (n + 1) <= 9 && (a - i) > 96 && a < 105) {
+        bp.push(z + (n - 1));
+        bp.push(z + (n + 1));
         collison('p');
     }
-    
+
 }
 function wpis(a, n) {
     a = a.charCodeAt();
     for (let i = 1; i <= 2; ++i) {
         z = String.fromCharCode(a + i);
         s = z + n;
-        if(i==1){
-            bp.push(z + (n-1));
-            bp.push(z + (n+1));
+        if (i == 1) {
+            bp.push(z + (n - 1));
+            bp.push(z + (n + 1));
             collison('p');
+            //console.log("bpn",bp);
         }
-        
+
         if (!bl.includes(s) && !wh.includes(s)) {
             bp.push(s);
         }
@@ -331,8 +869,9 @@ function wpis(a, n) {
         }
 
     }
-    
-    
+
+
+
 }
 function wpss(a, n) {
     a = a.charCodeAt();
@@ -340,8 +879,8 @@ function wpss(a, n) {
         z = String.fromCharCode(a + i);
         s = z + n;
         if (!bl.includes(s) && !wh.includes(s)) {
-            if(n>=1 && n<=8 && (a-i)>96 && a<105){
-                console.log(s);
+            if (n >= 1 && n <= 8 && (a - i) > 96 && a < 105) {
+                //console.log(s);
                 bp.push(s);
             }
         }
@@ -349,9 +888,9 @@ function wpss(a, n) {
             break;
         }
     }
-    if((n-1)>=1 && (n+1)<=8 && (a-i)>96 && a<105){
-        bp.push(z + (n-1));
-        bp.push(z + (n+1));
+    if ((n - 1) >= 1 && (n + 1) <= 8 && (a - 1) > 96 && a < 105) {
+        bp.push(z + (n - 1));
+        bp.push(z + (n + 1));
         collison('p');
     }
 }
@@ -412,15 +951,20 @@ function bkns(a, n) {
     }
 }
 function brs(a, n) {
+    //console.log("kjkjkjkj",a,n);
     a = a.charCodeAt();
+    //console.log("kjkjkjkj",a,n);
     for (let i = 0; i < 4; i++) {
+        //console.log("for i",i);
         for (let j = 0; j < 8; j++) {
+            //console.log("for j",j);
             if (i == 0) {
                 if ((n + j + 1) < 9) {
                     z = String.fromCharCode(a);
                     s = z + (n + j + 1);
+                    //console.log("fg1",s);
                     if (!bl.includes(s) && !wh.includes(s)) {
-                        console.log(s);
+                        //console.log(s,"kjkjkjk");
                         bp.push(s);
                     }
                     else {
@@ -433,8 +977,9 @@ function brs(a, n) {
                 if ((n - j - 1) > 0) {
                     z = String.fromCharCode(a);
                     s = z + (n - j - 1);
+                    //console.log("fg2",s);
                     if (!bl.includes(s) && !wh.includes(s)) {
-                        console.log(s);
+                        //console.log(s,"kjkjkjk");
                         bp.push(s);
                     }
                     else {
@@ -447,8 +992,9 @@ function brs(a, n) {
                 if ((a - j - 1) > 96) {
                     z = String.fromCharCode(a - j - 1);
                     s = z + n;
+                    //console.log("fg3",s);
                     if (!bl.includes(s) && !wh.includes(s)) {
-                        console.log(s);
+                        //console.log(s,"kjkjkjk");
                         bp.push(s);
                     }
                     else {
@@ -461,8 +1007,9 @@ function brs(a, n) {
                 if ((a + j + 1) < 105) {
                     z = String.fromCharCode(a + j + 1);
                     s = z + n;
+                    //console.log("fg4",s);
                     if (!bl.includes(s) && !wh.includes(s)) {
-                        console.log(s);
+                        //console.log(s,"kjkjkjk");
                         bp.push(s);
                     }
                     else {
@@ -483,7 +1030,7 @@ function bbs(a, n) {
                     z = String.fromCharCode(a + j + 1);
                     s = z + (n + j + 1);
                     if (!bl.includes(s) && !wh.includes(s)) {
-                        console.log(s);
+                        //console.log(s);
                         bp.push(s);
                     }
                     else {
@@ -497,7 +1044,7 @@ function bbs(a, n) {
                     z = String.fromCharCode(a - j - 1);
                     s = z + (n - j - 1);
                     if (!bl.includes(s) && !wh.includes(s)) {
-                        console.log(s);
+                        //console.log(s);
                         bp.push(s);
                     }
                     else {
@@ -511,7 +1058,7 @@ function bbs(a, n) {
                     z = String.fromCharCode(a - j - 1);
                     s = z + (n + j + 1);
                     if (!bl.includes(s) && !wh.includes(s)) {
-                        console.log(s);
+                        //console.log(s);
                         bp.push(s);
                     }
                     else {
@@ -525,7 +1072,7 @@ function bbs(a, n) {
                     z = String.fromCharCode(a + j + 1);
                     s = z + (n - j - 1);
                     if (!bl.includes(s) && !wh.includes(s)) {
-                        console.log(s);
+                        //console.log(s);
                         bp.push(s);
                     }
                     else {
@@ -546,7 +1093,7 @@ function bqs(a, n) {
                     z = String.fromCharCode(a + j + 1);
                     s = z + (n + j + 1);
                     if (!bl.includes(s) && !wh.includes(s)) {
-                        console.log(s);
+                        //console.log(s);
                         bp.push(s);
                     }
                     else {
@@ -555,12 +1102,12 @@ function bqs(a, n) {
                     }
                 }
             }
-            else if (i == 1) {   
+            else if (i == 1) {
                 if ((n + j + 1) < 9) {
                     z = String.fromCharCode(a);
                     s = z + (n + j + 1);
                     if (!bl.includes(s) && !wh.includes(s)) {
-                        console.log(s);
+                        //console.log(s);
                         bp.push(s);
                     }
                     else {
@@ -574,7 +1121,7 @@ function bqs(a, n) {
                     z = String.fromCharCode(a - j - 1);
                     s = z + (n - j - 1);
                     if (!bl.includes(s) && !wh.includes(s)) {
-                        console.log(s);
+                        //console.log(s);
                         bp.push(s);
                     }
                     else {
@@ -588,7 +1135,7 @@ function bqs(a, n) {
                     z = String.fromCharCode(a);
                     s = z + (n - j - 1);
                     if (!bl.includes(s) && !wh.includes(s)) {
-                        console.log(s);
+                        //console.log(s);
                         bp.push(s);
                     }
                     else {
@@ -602,7 +1149,7 @@ function bqs(a, n) {
                     z = String.fromCharCode(a - j - 1);
                     s = z + (n + j + 1);
                     if (!bl.includes(s) && !wh.includes(s)) {
-                        console.log(s);
+                        //console.log(s);
                         bp.push(s);
                     }
                     else {
@@ -616,7 +1163,7 @@ function bqs(a, n) {
                     z = String.fromCharCode(a - j - 1);
                     s = z + n;
                     if (!bl.includes(s) && !wh.includes(s)) {
-                        console.log(s);
+                        //console.log(s);
                         bp.push(s);
                     }
                     else {
@@ -625,12 +1172,12 @@ function bqs(a, n) {
                     }
                 }
             }
-            else if(i==6){
+            else if (i == 6) {
                 if ((a + j + 1) < 105 && (n - j - 1) > 0) {
                     z = String.fromCharCode(a + j + 1);
                     s = z + (n - j - 1);
                     if (!bl.includes(s) && !wh.includes(s)) {
-                        console.log(s);
+                        //console.log(s);
                         bp.push(s);
                     }
                     else {
@@ -639,12 +1186,12 @@ function bqs(a, n) {
                     }
                 }
             }
-            else{ 
+            else {
                 if ((a + j + 1) < 105) {
                     z = String.fromCharCode(a + j + 1);
                     s = z + n;
                     if (!bl.includes(s) && !wh.includes(s)) {
-                        console.log(s);
+                        //console.log(s);
                         bp.push(s);
                     }
                     else {
@@ -657,16 +1204,19 @@ function bqs(a, n) {
     }
 }
 function bks(a, n) {
+    console.log("1");
     a = a.charCodeAt();
     for (let i = 0; i < 8; i++) {
+        console.log("2");
         for (let j = 0; j < 1; j++) {
             if (i == 0) {
                 if ((n + j + 1) < 9 && (a + j + 1) < 105) {
                     z = String.fromCharCode(a + j + 1);
                     s = z + (n + j + 1);
                     if (!bl.includes(s) && !wh.includes(s)) {
-                        console.log(s);
+                        //console.log(s);
                         bp.push(s);
+                        console.log(bp,"bkss");
                     }
                     else {
                         collison('bs');
@@ -674,13 +1224,14 @@ function bks(a, n) {
                     }
                 }
             }
-            else if (i == 1) {   
+            else if (i == 1) {
                 if ((n + j + 1) < 9) {
                     z = String.fromCharCode(a);
                     s = z + (n + j + 1);
                     if (!bl.includes(s) && !wh.includes(s)) {
-                        console.log(s);
+                        //console.log(s);
                         bp.push(s);
+                        console.log(bp,"bkss");
                     }
                     else {
                         collison('bs');
@@ -693,8 +1244,9 @@ function bks(a, n) {
                     z = String.fromCharCode(a - j - 1);
                     s = z + (n - j - 1);
                     if (!bl.includes(s) && !wh.includes(s)) {
-                        console.log(s);
+                        //console.log(s);
                         bp.push(s);
+                        console.log(bp,"bkss");
                     }
                     else {
                         collison('bs');
@@ -707,8 +1259,9 @@ function bks(a, n) {
                     z = String.fromCharCode(a);
                     s = z + (n - j - 1);
                     if (!bl.includes(s) && !wh.includes(s)) {
-                        console.log(s);
+                        //console.log(s);
                         bp.push(s);
+                        console.log(bp,"bkss");
                     }
                     else {
                         collison('bs');
@@ -721,8 +1274,9 @@ function bks(a, n) {
                     z = String.fromCharCode(a - j - 1);
                     s = z + (n + j + 1);
                     if (!bl.includes(s) && !wh.includes(s)) {
-                        console.log(s);
+                        //console.log(s);
                         bp.push(s);
+                        console.log(bp,"bkss");
                     }
                     else {
                         collison('bs');
@@ -735,8 +1289,9 @@ function bks(a, n) {
                     z = String.fromCharCode(a - j - 1);
                     s = z + n;
                     if (!bl.includes(s) && !wh.includes(s)) {
-                        console.log(s);
+                        //console.log(s);
                         bp.push(s);
+                        console.log(bp,"bkss");
                     }
                     else {
                         collison('bs');
@@ -744,13 +1299,14 @@ function bks(a, n) {
                     }
                 }
             }
-            else if(i==6){
+            else if (i == 6) {
                 if ((a + j + 1) < 105 && (n - j - 1) > 0) {
                     z = String.fromCharCode(a + j + 1);
                     s = z + (n - j - 1);
                     if (!bl.includes(s) && !wh.includes(s)) {
-                        console.log(s);
+                        //console.log(s);
                         bp.push(s);
+                        console.log(bp,"bkss");
                     }
                     else {
                         collison('bs');
@@ -758,13 +1314,14 @@ function bks(a, n) {
                     }
                 }
             }
-            else{ 
+            else {
                 if ((a + j + 1) < 105) {
                     z = String.fromCharCode(a + j + 1);
                     s = z + n;
                     if (!bl.includes(s) && !wh.includes(s)) {
-                        console.log(s);
+                        //console.log(s);
                         bp.push(s);
+                        console.log(bp,"bkss");
                     }
                     else {
                         collison('bs');
@@ -774,6 +1331,38 @@ function bks(a, n) {
             }
         }
     }
+    if(pec=='w'){
+        console.log(bp,"white");
+        bp = bp.filter(value => !restrictw.includes(value));
+        console.log(bp,"white");
+    }
+    else{
+        console.log(bp,"black");
+        bp = bp.filter(value => !restrictb.includes(value));
+        console.log(bp,"black");
+    }
+    //final filteratiion on bp
+    // finalpath(pec);
+    console.log(bp,"king is king");
+}
+function finalpath(pec){
+    if(pec=='b'){
+        let tempa = kcpw;
+        for(let k=0;k<bp.length;++k){
+            let tempq=bp[k].toString();
+            a = tempq[0];
+            n = parseInt(tempq[1]);
+            checkb(a,n,pec);  
+            if (pec.includes('b')) {////////////////////////////here
+
+            }
+        }
+        checkb(a=tempa[0],n=parseInt(tempa[1]),pec);
+    }
+    if(pec=='w'){
+//////////////////////////////////here
+        }
+    
 }
 function handler(a, n, l, c) {
     if (l != []) {
@@ -782,26 +1371,30 @@ function handler(a, n, l, c) {
                 tog(a + n);
                 sel = a + n;
                 bl.push(sel);
-                pec.push('b');
+                pec ='b';
                 document.getElementById(sel).style.border = "solid 3px white";
                 document.getElementById(sel).style.boxSizing = "border-box";
                 bpis(a, n);
+                //console.log("pawan",bp);
+                if(flag){
+                    bp = bp.filter(value => checkpathl.includes(value) || value=== 'enm');
+                }
                 for (i = 0; i < bp.length; i++) {
-                    if(bp[i+1]=='enm'){
-                        console.log(bp);
+                    if (bp[i + 1] == 'enm') {
+                        // //console.log(bp,"pawn");
                         token.push(bp[i]);
                         document.getElementById(bp[i]).style.border = "solid 2.5px red";
                         document.getElementById(bp[i]).style.boxSizing = "border-box";
                         bp.splice(bp.indexOf('enm'), 1);
                     }
-                    else{
-                        console.log(bp[i]);
+                    else {
+                        //console.log(bp[i]);
                         token.push(bp[i]);
                         document.getElementById(bp[i]).style.border = "solid 2.5px cyan";
                         document.getElementById(bp[i]).style.boxSizing = "border-box";
                     }
                 }
-                // console.log(l[0],'lll');
+                // //console.log(l[0],'lll');
                 token.push(l[1]);
                 token.push(l);
                 // l.length=0;
@@ -810,20 +1403,24 @@ function handler(a, n, l, c) {
                 tog(a + n);
                 sel = a + n;
                 bl.push(sel);
-                pec.push('b');
+                pec = 'b';
                 document.getElementById(sel).style.border = "solid 3px white";
                 document.getElementById(sel).style.boxSizing = "border-box";
                 bpss(a, n);
+                //console.log("pawan",bp);
+                if(flag){
+                    bp = bp.filter(value => checkpathl.includes(value) || value=== 'enm');
+                }
                 for (i = 0; i < bp.length; i++) {
-                    if(bp[i+1]=='enm'){
-                        console.log(bp);
+                    if (bp[i + 1] == 'enm') {
+                        //console.log(bp);
                         token.push(bp[i]);
                         document.getElementById(bp[i]).style.border = "solid 2.5px red";
                         document.getElementById(bp[i]).style.boxSizing = "border-box";
                         bp.splice(bp.indexOf('enm'), 1);
                     }
-                    else{
-                        console.log(bp[i]);
+                    else {
+                        //console.log(bp[i]);
                         token.push(bp[i]);
                         document.getElementById(bp[i]).style.border = "solid 2.5px cyan";
                         document.getElementById(bp[i]).style.boxSizing = "border-box";
@@ -838,20 +1435,25 @@ function handler(a, n, l, c) {
                 tog(a + n);
                 sel = a + n;
                 wh.push(sel);
-                pec.push('w');
+                pec = 'w';
                 document.getElementById(sel).style.border = "solid 3px white";
                 document.getElementById(sel).style.boxSizing = "border-box";
                 wpis(a, n);
+                //console.log(bp,"kokokokokoo");
+                if(flag){
+                    bp = bp.filter(value => checkpathl.includes(value) || value === 'enm');
+                    //console.log(bp,"kokokokokoo");
+                }
                 for (i = 0; i < bp.length; i++) {
-                    if(bp[i+1]=='enm'){
-                        console.log(bp[i]);
+                    if (bp[i + 1] == 'enm') {
+                        //console.log(bp[i]);
                         token.push(bp[i]);
                         document.getElementById(bp[i]).style.border = "solid 2.5px red";
                         document.getElementById(bp[i]).style.boxSizing = "border-box";
                         bp.splice(bp.indexOf('enm'), 1);
                     }
-                    else{
-                        console.log(bp[i]);
+                    else {
+                        //console.log(bp[i]);
                         token.push(bp[i]);
                         document.getElementById(bp[i]).style.border = "solid 2.5px cyan";
                         document.getElementById(bp[i]).style.boxSizing = "border-box";
@@ -865,20 +1467,23 @@ function handler(a, n, l, c) {
                 tog(a + n);
                 sel = a + n;
                 wh.push(sel);
-                pec.push('w');
+                pec = 'w';
                 document.getElementById(sel).style.border = "solid 3px white";
                 document.getElementById(sel).style.boxSizing = "border-box";
                 wpss(a, n);
+                if(flag){
+                    bp = bp.filter(value => checkpathl.includes(value) || value=== 'enm');
+                }
                 for (i = 0; i < bp.length; i++) {
-                    if(bp[i+1]=='enm'){
-                        console.log(bp[i]);
+                    if (bp[i + 1] == 'enm') {
+                        //console.log(bp[i]);
                         token.push(bp[i]);
                         document.getElementById(bp[i]).style.border = "solid 2.5px red";
                         document.getElementById(bp[i]).style.boxSizing = "border-box";
                         bp.splice(bp.indexOf('enm'), 1);
                     }
-                    else{
-                        console.log(bp[i]);
+                    else {
+                        //console.log(bp[i]);
                         token.push(bp[i]);
                         document.getElementById(bp[i]).style.border = "solid 2.5px cyan";
                         document.getElementById(bp[i]).style.boxSizing = "border-box";
@@ -897,20 +1502,23 @@ function handler(a, n, l, c) {
             else if (l[0] == 'w') {
                 wh.push(sel);
             }
-            pec.push(l[0]);
+            pec = l[0].toString();
             document.getElementById(sel).style.border = "solid 3px white";
             document.getElementById(sel).style.boxSizing = "border-box";
             bkns(a, n);
+            if(flag){
+                bp = bp.filter(value => checkpathl.includes(value) || value=== 'enm');
+            }
             for (i = 0; i < bp.length; i++) {
-                if(bp[i+1]=='enm'){
-                    console.log(bp[i]);
+                if (bp[i + 1] == 'enm') {
+                    //console.log(bp[i]);
                     token.push(bp[i]);
                     document.getElementById(bp[i]).style.border = "solid 2.5px red";
                     document.getElementById(bp[i]).style.boxSizing = "border-box";
                     bp.splice(bp.indexOf('enm'), 1);
                 }
-                else{
-                    console.log(bp[i]);
+                else {
+                    //console.log(bp[i]);
                     token.push(bp[i]);
                     document.getElementById(bp[i]).style.border = "solid 2.5px cyan";
                     document.getElementById(bp[i]).style.boxSizing = "border-box";
@@ -928,20 +1536,23 @@ function handler(a, n, l, c) {
             else if (l[0] == 'w') {
                 wh.push(sel);
             }
-            pec.push(l[0]);
+            pec = l[0].toString();
             document.getElementById(sel).style.border = "solid 3px white";
             document.getElementById(sel).style.boxSizing = "border-box";
             brs(a, n);
+            if(flag){
+                bp = bp.filter(value => checkpathl.includes(value) || value=== 'enm');
+            }
             for (i = 0; i < bp.length; i++) {
-                if(bp[i+1]=='enm'){
-                    console.log(bp[i]);
+                if (bp[i + 1] == 'enm') {
+                    //console.log(bp[i]);
                     token.push(bp[i]);
                     document.getElementById(bp[i]).style.border = "solid 2.5px red";
                     document.getElementById(bp[i]).style.boxSizing = "border-box";
                     bp.splice(bp.indexOf('enm'), 1);
                 }
-                else{
-                    console.log(bp[i]);
+                else {
+                    //console.log(bp[i]);
                     token.push(bp[i]);
                     document.getElementById(bp[i]).style.border = "solid 2.5px cyan";
                     document.getElementById(bp[i]).style.boxSizing = "border-box";
@@ -951,7 +1562,7 @@ function handler(a, n, l, c) {
             token.push(l);
         }
         if (c == 'bishop') {
-            console.log("hj");
+            //console.log("hj");
             tog(a + n);
             sel = a + n;
             if (l[0] == 'b') {
@@ -960,20 +1571,23 @@ function handler(a, n, l, c) {
             else if (l[0] == 'w') {
                 wh.push(sel);
             }
-            pec.push(l[0]);
+            pec = l[0].toString();
             document.getElementById(sel).style.border = "solid 3px white";
             document.getElementById(sel).style.boxSizing = "border-box";
             bbs(a, n);
+            if(flag){
+                bp = bp.filter(value => checkpathl.includes(value) || value=== 'enm');
+            }
             for (i = 0; i < bp.length; i++) {
-                if(bp[i+1]=='enm'){
-                    console.log(bp[i]);
+                if (bp[i + 1] == 'enm') {
+                    //console.log(bp[i]);
                     token.push(bp[i]);
                     document.getElementById(bp[i]).style.border = "solid 2.5px red";
                     document.getElementById(bp[i]).style.boxSizing = "border-box";
                     bp.splice(bp.indexOf('enm'), 1);
                 }
-                else{
-                    console.log(bp[i]);
+                else {
+                    //console.log(bp[i]);
                     token.push(bp[i]);
                     document.getElementById(bp[i]).style.border = "solid 2.5px cyan";
                     document.getElementById(bp[i]).style.boxSizing = "border-box";
@@ -991,20 +1605,23 @@ function handler(a, n, l, c) {
             else if (l[0] == 'w') {
                 wh.push(sel);
             }
-            pec.push(l[0]);
+            pec = l[0].toString();
             document.getElementById(sel).style.border = "solid 3px white";
             document.getElementById(sel).style.boxSizing = "border-box";
             bqs(a, n);
+            if(flag){
+                bp = bp.filter(value => checkpathl.includes(value) || value=== 'enm');
+            }
             for (i = 0; i < bp.length; i++) {
-                if(bp[i+1]=='enm'){
-                    console.log(bp[i]);
+                if (bp[i + 1] == 'enm') {
+                    //console.log(bp[i]);
                     token.push(bp[i]);
                     document.getElementById(bp[i]).style.border = "solid 2.5px red";
                     document.getElementById(bp[i]).style.boxSizing = "border-box";
                     bp.splice(bp.indexOf('enm'), 1);
                 }
-                else{
-                    console.log(bp[i]);
+                else {
+                    //console.log(bp[i]);
                     token.push(bp[i]);
                     document.getElementById(bp[i]).style.border = "solid 2.5px cyan";
                     document.getElementById(bp[i]).style.boxSizing = "border-box";
@@ -1012,30 +1629,32 @@ function handler(a, n, l, c) {
             }
             token.push(l[1]);
             token.push(l);
+            //console.log("queen out", token);
         }
         if (c == 'king') {
             tog(a + n);
             sel = a + n;
             if (l[0] == 'b') {
                 bl.push(sel);
+
             }
             else if (l[0] == 'w') {
                 wh.push(sel);
             }
-            pec.push(l[0]);
+            pec = l[0].toString();
             document.getElementById(sel).style.border = "solid 3px white";
             document.getElementById(sel).style.boxSizing = "border-box";
             bks(a, n);
             for (i = 0; i < bp.length; i++) {
-                if(bp[i+1]=='enm'){
-                    console.log(bp[i]);
+                if (bp[i + 1] == 'enm') {
+                    //console.log(bp[i]);
                     token.push(bp[i]);
                     document.getElementById(bp[i]).style.border = "solid 2.5px red";
                     document.getElementById(bp[i]).style.boxSizing = "border-box";
                     bp.splice(bp.indexOf('enm'), 1);
                 }
-                else{
-                    console.log(bp[i]);
+                else {
+                    //console.log(bp[i]);
                     token.push(bp[i]);
                     document.getElementById(bp[i]).style.border = "solid 2.5px cyan";
                     document.getElementById(bp[i]).style.boxSizing = "border-box";
@@ -1054,160 +1673,343 @@ function rem(ele, pec) {
         wh = wh.filter(e => e !== ele);
     }
 }
-function bxevents(idx, ls, eve, c) {
-    if((pec=='b' && bl.includes(idx)) || bp.includes(idx)){
+function bxevents(idx, ls, eve) {
+    // //console.log("cwl", token, pec, idx, ls[1], bk1, ls[1] == bk2);
+    if ((pec.includes('b'))) {
+        // restriction(kcpb);
+        // restriction(kcpw);
+        if ((pec.includes('b') && (bl.includes(idx)) || bp.includes(idx))) {
+            tog(idx);
+            a = idx[0];
+            n = parseInt(idx[1]);
+            if (!token.includes(idx)) {
+                //console.log("cl1", token, pec);
+                //console.log("clg");
+                token = [];
+                pec = [];
+                if (bl.length > bpc) {
+                    bl.pop();
+                }
+                if (wh.length > wpc) {
+                    wh.pop();
+                }
+                d = [];
+            }
+            if (token.includes(idx)) {
+                
+                //check removel
+                //console.log("heredfddfdfdfdffdf",checkpathl.includes(idx));
+                
+                
+                //console.log("cl1", token, pec);
+                // //console.log(pec[0]);
+                // //console.log(ls[0]);
+                if (ls.length != 0) {  //this condtion checks that box which is referenced, is empty box or that has any value? ->if false then by pass this code
+                    if (pec[0] != ls[0]) { //this condtion checks that box has different piece or not? ->if yes then true
+                        jd = ls[ls.length - 1]; //this command extract that after referenced box has which piece
+                        str = `${jd.outerHTML}`; //this command is used to convert that extracted variable name into string for further process like intialize, deletion
+                        if (pec == 'b') {  // if black piece is eleminate white then remove that from other list and push in other list
+                            rem(idx, 'w');
+                            wpc--;
+                            whc.push(ls[1]);
+                            strl = strl + str;
+                            whcb.innerHTML = strl;
+
+                        }
+                        if (pec == 'w') {  // if white piece is eleminate white then remove that from other list and push in other list
+                            rem(idx, 'b');
+                            bpc--;
+                            blc.push(ls[1]);
+                            strl1 = strl1 + str;
+                            blcb.innerHTML = strl1;
+                        }
+                        ls[1].remove();
+                        ls.length = 0;
+
+                    }
+                }
+                eve.append(token[token.length - 2]);
+                ls.push(token[token.length - 1][0]);
+                //console.log(token[token.length - 1][0], 'nk');
+                ls.push(token[token.length - 2]);
+                //console.log(token[token.length - 2], 'mk');
+                //console.log(ls);
+                token[token.length - 1].length = 0;
+                token = [];
+                //console.log("here bl", pec, ls[1] == bk || ls[1] == wk);
+
+                a=idx[0];
+                n=parseInt(idx[1]);
+                if (pec.includes('b')) {
+                    if (ls[1] == bk) {
+                        checkb(a, n, pec);
+                        //console.log("change??", a, n, pec,idx);
+                    }
+                }
+                if(flag){
+                    if(checkpathl.some(value => bl.includes(value))){
+                        flag=false;
+                        token1=[];
+                        checkremoverd(kcpb,checker);
+                    }
+                    console.log(temp1,kcpb,kcpw,"hjerr");
+                    if(temp1!=kcpb){
+                        flag=false;
+                        token1=[];
+                        checkremoverd(temp1,checker);
+                    }
+                }
+
+
+                if (pec.includes('b')) {
+                    rem(bl[bl.length - 1], 'b');
+                    bl.push(idx);
+                    //check for check!!!
+                    //console.log("yeqs");
+                    // //console.log(!wkc.some(element => wh.includes(element)),"condition");
+                    // //console.log(wkc.includes(idx),"condition1");
+                    //console.log(idx, "hrt", ls);
+                    if (wkc.includes(idx)) {
+                        // //console.log(ls[1]==br1 || ls[1]==br2,"condition");
+                        //console.log(idx, "hrt", ls[1] == bk1, ls[1] == bk2);
+                        if (ls[1] == bq) {
+                            bqs(a = idx[0], n = parseInt(idx[1]));
+                        }
+                        else if (ls[1] == bb1 || ls[1] == bb2) {
+                            bbs(a = idx[0], n = parseInt(idx[1]));
+                        }
+                        else if (ls[1] == br1 || ls[1] == br2) {
+                            brs(a = idx[0], n = parseInt(idx[1]));
+                        }
+                        else if (ls[1] == bk) {
+                            bks(a = idx[0], n = parseInt(idx[1]));
+                        }
+                        else if (ls[1] == bk1 || ls[1] == bk2) {
+                            bkns(a = idx[0], n = parseInt(idx[1]));
+                            //console.log("feef", bp);
+                        }
+                        else if (kcpw[0].charCodeAt() > 100) {
+                            bpis(a = idx[0], n = parseInt(idx[1]));
+                        }
+                        else {
+                            bpss(a = idx[0], n = parseInt(idx[1]));
+                        }
+                        if (bp.includes(kcpw)) {
+                            //console.log("check!!!",bp);
+                            //now specify check path!!!!!!!!!!!!!!!!!
+                            if (ls[1] == bk1 || ls[1] == bk2) {
+                                checkpathl.push(idx);
+                            }
+                            else {
+                                checkpath(idx, kcpw);
+                            }
+                            checkhandler(idx,kcpw);
+
+                        }
+                        //console.log(ls, "lkist", idx, bp, c);
+                        bp = [];
+
+                    }
+
+                }
+                else if (pec.includes('w')) {
+                    rem(wh[wh.length - 1], 'w');
+                    wh.push(idx);
+                }
+                changer();
+                console.log("bbb");
+                restriction(kcpb);
+                console.log("www1");
+                restriction(kcpw);
+                console.log("www2");
+
+            }
+            else if (ls.includes(bp1) ||
+                ls.includes(bp2) ||
+                ls.includes(bp3) ||
+                ls.includes(bp4) ||
+                ls.includes(bp5) ||
+                ls.includes(bp6) ||
+                ls.includes(bp7) ||
+                ls.includes(bp8)) {
+                handler(a, n, ls, c = 'bp');
+            }
+            else if (ls.includes(wp1) ||
+                ls.includes(wp2) ||
+                ls.includes(wp3) ||
+                ls.includes(wp4) ||
+                ls.includes(wp5) ||
+                ls.includes(wp6) ||
+                ls.includes(wp7) ||
+                ls.includes(wp8)) {
+                handler(a, n, ls, c = 'wp');
+            }
+            else if (ls.includes(bk1) || ls.includes(bk2) || ls.includes(wk1) || ls.includes(wk2)) {
+                handler(a, n, ls, c = 'knight');
+            }
+            else if (ls.includes(br1) || ls.includes(br2) || ls.includes(wr1) || ls.includes(wr2)) {
+                handler(a, n, ls, c = 'rook');
+            }
+            else if (ls.includes(bb1) || ls.includes(bb2) || ls.includes(wb1) || ls.includes(wb2)) {
+                handler(a, n, ls, c = 'bishop');
+            }
+            else if (ls.includes(bq) || ls.includes(wq)) {
+                handler(a, n, ls, c = 'queen');
+            }
+            else if (ls.includes(bk) || ls.includes(wk)) {
+                handler(a, n, ls, c = 'king');
+            }
+            else {
+                token = [];
+            }
+        }
+    }
+    if ((pec.includes('w') && (wh.includes(idx)) || bp.includes(idx))) {
+        // restriction(kcpb);
+        // restriction(kcpw);
         tog(idx);
+        //console.log(pec[0], idx, "kl", token);
         a = idx[0];
         n = parseInt(idx[1]);
         if (!token.includes(idx)) {
-            console.log("clg");
+            //console.log("clg");
+            //console.log(ls[0], "klklkl", idx, token);
             token = [];
-            pec = [];
+            // pec = [];
             if (bl.length > bpc) {
                 bl.pop();
             }
             if (wh.length > wpc) {
                 wh.pop();
             }
+            d = [];
+
         }
         if (token.includes(idx)) {
-            // console.log(pec[0]);
-            // console.log(ls[0]);
-            if(ls.length!=0){
-                if(pec[0] != ls[0]){
-                    console.log(eve,'eeesss');
-                    jd = ls[ls.length - 1];
-                    str = `${jd.outerHTML}`;
-                    if(pec=='b'){
-                        rem(idx,'w');
+            
+            //console.log("heredfdfdfdfdfdfdf",checkpathl.includes(idx));
+            
+            // //console.log();
+            if (ls.length != 0) {
+                if (pec[0] != ls[0]) { //this condtion checks that box has different piece or not? ->if yes then true
+                    jd = ls[ls.length - 1]; //this command extract that after referenced box has which piece
+                    str = `${jd.outerHTML}`; //this command is used to convert that extracted variable name into string for further process like intialize, deletion
+                    if (pec == 'b') {  // if black piece is eleminate white then remove that from other list and push in other list
+                        rem(idx, 'w');
                         wpc--;
                         whc.push(ls[1]);
                         strl = strl + str;
-                        whcb.innerHTML= strl;
+                        whcb.innerHTML = strl;
 
                     }
-                    if(pec=='w'){
-                        rem(idx,'b');
+                    if (pec == 'w') {  // if white piece is eleminate white then remove that from other list and push in other list
+                        rem(idx, 'b');
                         bpc--;
                         blc.push(ls[1]);
                         strl1 = strl1 + str;
-                        blcb.innerHTML= strl1;
+                        blcb.innerHTML = strl1;
                     }
                     ls[1].remove();
-                    ls.length=0;
-                    
+                    ls.length = 0;
+
                 }
             }
             eve.append(token[token.length - 2]);
             ls.push(token[token.length - 1][0]);
-            console.log(token[token.length - 1][0],'nk');
+            //console.log(token[token.length - 1][0], 'nk');
             ls.push(token[token.length - 2]);
-            console.log(token[token.length - 2],'mk');
-            console.log(ls);
+            //console.log(token[token.length - 2], 'mk');
+            //console.log(ls);
             token[token.length - 1].length = 0;
             token = [];
-            if (pec.includes('b')) {
-                rem(bl[bl.length - 1], 'b');
-                bl.push(idx);
-            }
-            else if (pec.includes('w')) {
-                rem(wh[wh.length - 1], 'w');
-                wh.push(idx);
-            }
-            changer()
-        }
-        else if (ls.includes(bp1) ||
-            ls.includes(bp2) ||
-            ls.includes(bp3) ||
-            ls.includes(bp4) ||
-            ls.includes(bp5) ||
-            ls.includes(bp6) ||
-            ls.includes(bp7) ||
-            ls.includes(bp8)) {
-            handler(a, n, ls, c = 'bp');
-        }
-        else if (ls.includes(wp1) ||
-            ls.includes(wp2) ||
-            ls.includes(wp3) ||
-            ls.includes(wp4) ||
-            ls.includes(wp5) ||
-            ls.includes(wp6) ||
-            ls.includes(wp7) ||
-            ls.includes(wp8)) {
-            handler(a, n, ls, c = 'wp');
-        }
-        else if (ls.includes(bk1) || ls.includes(bk2) || ls.includes(wk1) || ls.includes(wk2)) {
-            handler(a, n, ls, c = 'knight');
-        }
-        else if (ls.includes(br1) || ls.includes(br2) || ls.includes(wr1) || ls.includes(wr2)) {
-            handler(a, n, ls, c = 'rook');
-        }
-        else if (ls.includes(bb1) || ls.includes(bb2) || ls.includes(wb1) || ls.includes(wb2)) {
-            handler(a, n, ls, c = 'bishop');
-        }
-        else if (ls.includes(bq) || ls.includes(wq)) {
-            handler(a, n, ls, c = 'queen');
-        }
-        else if (ls.includes(bk) || ls.includes(wk)) {
-            handler(a, n, ls, c = 'king');
-        }
-        else {
-            token = [];
-        }
-    }
-    if((pec=='w' && wh.includes(idx)) || bp.includes(idx)){
-        tog(idx);
-        a = idx[0];
-        n = parseInt(idx[1]);
-        if (!token.includes(idx)) {
-            console.log("clg");
-            token = [];
-            pec = [];
-            if (bl.length > bpc) {
-                bl.pop();
-            }
-            if (wh.length > wpc) {
-                wh.pop();
-            }
-        }
-        if (token.includes(idx)) {
-            // console.log(pec[0]);
-            // console.log(ls[0]);
-            if(ls.length!=0){
-                if(pec[0] != ls[0]){
-                    console.log(eve);
-                    if(pec=='b'){
-                        rem(idx,'w');
-                        wpc--;
-                        whc.push(ls[1]);
-                    }
-                    if(pec=='w'){
-                        rem(idx,'b');
-                        bpc--;
-                        blc.push(ls[1]);
-                    }
-                    ls[1].remove();
-                    ls.length=0;
-                    
+            //console.log("here cf", pec);
+
+            a=idx[0];
+            n=parseInt(idx[1]);
+            if (pec.includes('w')) {
+                if (ls[1] == wk) {
+                    checkb(a, n, pec);
+                    //console.log("change??", a, n, pec);
                 }
             }
-            eve.append(token[token.length - 2]);
-            ls.push(token[token.length - 1][0]);
-            console.log(token[token.length - 1][0],'nk');
-            ls.push(token[token.length - 2]);
-            console.log(token[token.length - 2],'mk');
-            console.log(ls);
-            token[token.length - 1].length = 0;
-            token = [];
+            if(flag){
+                //console.log("cjcjcj");
+                if(checkpathl.includes(idx)){
+                    flag=false;
+                    token1=[];
+                    checkremoverd(kcpw,checker);
+                }
+                console.log(temp1,kcpw,"hjerr");
+                if(temp1!=kcpw){
+                    flag=false;
+                    token1=[];
+                    checkremoverd(temp1,checker);
+                }
+            }
+
             if (pec.includes('b')) {
                 rem(bl[bl.length - 1], 'b');
                 bl.push(idx);
+                //console.log("hesj");
+
+                //check for check!!!
             }
             else if (pec.includes('w')) {
+                //console.log(idx, "jkjk");
                 rem(wh[wh.length - 1], 'w');
+
                 wh.push(idx);
+                //console.log("yeqs");
+                // //console.log(!wkc.some(element => wh.includes(element)),"condition");
+                // //console.log(wkc.includes(idx),"condition1");
+                if (bkc.includes(idx)) {
+                    // //console.log(ls[1]==br1 || ls[1]==br2,"condition");
+                    if (ls[1] == wq) {
+                        bqs(a = idx[0], n = parseInt(idx[1]));
+                    }
+                    else if (ls[1] == wb1 || ls[1] == wb2) {
+                        bbs(a = idx[0], n = parseInt(idx[1]));
+                    }
+                    else if (ls[1] == wr1 || ls[1] == wr2) {
+                        brs(a = idx[0], n = parseInt(idx[1]));
+
+                    }
+                    else if (ls[1] == wk) {
+                        bks(a = idx[0], n = parseInt(idx[1]));
+                    }
+                    else if (ls[1] == wk1 || ls[1] == wk2) {
+                        bkns(a = idx[0], n = parseInt(idx[1]));
+                        //console.log("feef", bp);
+                    }
+                    else if (kcpb[0].charCodeAt() > 100) {
+                        wpis(a = idx[0], n = parseInt(idx[1]));
+                    }
+                    else {
+                        wpss(a = idx[0], n = parseInt(idx[1]));
+                    }
+
+                    if (bp.includes(kcpb)) {
+                        //console.log("check!!!");
+                        //now specify check path!!!!!!!!!!!!!!!!!!!!!!!!
+                        if (ls[1] == wk1 || ls[1] == wk2) {
+                            checkpathl.push(idx);
+                        }
+                        else {
+                            checkpath(idx, kcpb);
+                        }
+                        checkhandler(idx,kcpb);
+
+                    }
+                    //console.log(ls, "lkist", idx, bp, kcpb);
+                    bp = [];
+                }
             }
             changer();
+            console.log("bbb");
+            restriction(kcpb);
+            console.log("www1");
+            restriction(kcpw);
+            console.log("www2");
         }
         else if (ls.includes(bp1) ||
             ls.includes(bp2) ||
@@ -1217,7 +2019,13 @@ function bxevents(idx, ls, eve, c) {
             ls.includes(bp6) ||
             ls.includes(bp7) ||
             ls.includes(bp8)) {
-            handler(a, n, ls, c = 'bp');
+            if(!flag){
+                handler(a, n, ls, c = 'bp');
+            }
+            else if(flag==true && checkremover(a,n)){
+                handler(a, n, ls, c = 'bp');
+            }
+            
         }
         else if (ls.includes(wp1) ||
             ls.includes(wp2) ||
@@ -1227,27 +2035,61 @@ function bxevents(idx, ls, eve, c) {
             ls.includes(wp6) ||
             ls.includes(wp7) ||
             ls.includes(wp8)) {
-            handler(a, n, ls, c = 'wp');
+                if(!flag){
+                    handler(a, n, ls, c = 'wp');
+                }
+                else if(flag==true && checkremover(a,n)){
+                    handler(a, n, ls, c = 'wp');
+                }
+            
         }
         else if (ls.includes(bk1) || ls.includes(bk2) || ls.includes(wk1) || ls.includes(wk2)) {
-            handler(a, n, ls, c = 'knight');
+            if(!flag){
+                handler(a, n, ls, c = 'knight');
+            }
+            else if(flag==true && checkremover(a,n)){
+                handler(a, n, ls, c = 'knight');
+            }
         }
         else if (ls.includes(br1) || ls.includes(br2) || ls.includes(wr1) || ls.includes(wr2)) {
-            handler(a, n, ls, c = 'rook');
+            if(!flag){
+                handler(a, n, ls, c = 'rook');
+            }
+            else if(flag==true && checkremover(a,n)){
+                handler(a, n, ls, c = 'rook');
+            }
         }
         else if (ls.includes(bb1) || ls.includes(bb2) || ls.includes(wb1) || ls.includes(wb2)) {
-            handler(a, n, ls, c = 'bishop');
+            if(!flag){
+                handler(a, n, ls, c = 'bishop');
+            }
+            else if(flag==true && checkremover(a,n)){
+                handler(a, n, ls, c = 'bishop');
+            }
         }
         else if (ls.includes(bq) || ls.includes(wq)) {
-            handler(a, n, ls, c = 'queen');
+            if(!flag){
+                handler(a, n, ls, c = 'queen');
+            }
+            else if(flag==true && checkremover(a,n)){
+                handler(a, n, ls, c = 'queen');
+            }
         }
         else if (ls.includes(bk) || ls.includes(wk)) {
-            handler(a, n, ls, c = 'king');
+            console.log("hereee 3");
+            if(!flag){
+                handler(a, n, ls, c = 'king');
+            }
+            else if(flag==true && checkremover(a,n)){
+                console.log("hrere 5");
+                handler(a, n, ls, c = 'king');
+            }
         }
         else {
             token = [];
         }
     }
+
 }
 
 a1e.onclick = () => { bxevents(a1, a1l, a1e) };
