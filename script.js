@@ -1473,7 +1473,7 @@ function checkmate() {
             console.log(bp, "click event?");
             let result = checkpathl.filter(item => !restrictb.includes(item));
             if (result.every(value => wh.includes(value)) && bp.length == 0) {
-                alert("check and mate by White,Black looses", bp);
+                alert("check and mate by Black,White looses", bp);
                 console.log(bp);
             }
 
@@ -1494,7 +1494,7 @@ function checkmate() {
             console.log(bp, "click event?", restrictw);
             let result = checkpathl.filter(item => !restrictw.includes(item));
             if (result.every(value => bl.includes(value)) && bp.length == 0) {
-                alert("check and mate by Black,White looses", bp);
+                alert("check and mate by White,Black looses", bp);
                 console.log(bp);
             }
         }
