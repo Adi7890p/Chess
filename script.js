@@ -45,168 +45,168 @@ let restrict_black = [], restrict_white = [];//for discovery check
 
 let bq1 = document.createElement("i");
 bq1.setAttribute("class", "fa-solid fa-chess-queen");
-bq1.style.color = "#403f3f";
+bq1.style.color = "#ffffffe1";
 
 let bq2 = document.createElement("i");
 bq2.setAttribute("class", "fa-solid fa-chess-queen");
-bq2.style.color = "#403f3f";
+bq2.style.color = "#ffffffe1";
 
 let bq3 = document.createElement("i");
 bq3.setAttribute("class", "fa-solid fa-chess-queen");
-bq3.style.color = "#403f3f";
+bq3.style.color = "#ffffffe1";
 
 let bq4 = document.createElement("i");
 bq4.setAttribute("class", "fa-solid fa-chess-queen");
-bq4.style.color = "#403f3f";
+bq4.style.color = "#ffffffe1";
 
 let bq5 = document.createElement("i");
 bq5.setAttribute("class", "fa-solid fa-chess-queen");
-bq5.style.color = "#403f3f";
+bq5.style.color = "#ffffffe1";
 
 let bq6 = document.createElement("i");
 bq6.setAttribute("class", "fa-solid fa-chess-queen");
-bq6.style.color = "#403f3f";
+bq6.style.color = "#ffffffe1";
 
 let bq7 = document.createElement("i");
 bq7.setAttribute("class", "fa-solid fa-chess-queen");
-bq7.style.color = "#403f3f";
+bq7.style.color = "#ffffffe1";
 
 let bq8 = document.createElement("i");
 bq8.setAttribute("class", "fa-solid fa-chess-queen");
-bq8.style.color = "#403f3f";
+bq8.style.color = "#ffffffe1";
 
 let bq9 = document.createElement("i");
 bq9.setAttribute("class", "fa-solid fa-chess-queen");
-bq9.style.color = "#403f3f";
+bq9.style.color = "#ffffffe1";
 
 // Store in a list
 let bql = [bq1, bq2, bq3, bq4, bq5, bq6, bq7, bq8,bq9];
 
 let bb1 = document.createElement("i");
 bb1.setAttribute("class", "fa-solid fa-chess-bishop");
-bb1.style.color = "#403f3f";
+bb1.style.color = "#ffffffe1";
 
 let bb2 = document.createElement("i");
 bb2.setAttribute("class", "fa-solid fa-chess-bishop");
-bb2.style.color = "#403f3f";
+bb2.style.color = "#ffffffe1";
 
 let bb3 = document.createElement("i");
 bb3.setAttribute("class", "fa-solid fa-chess-bishop");
-bb3.style.color = "#403f3f";
+bb3.style.color = "#ffffffe1";
 
 let bb4 = document.createElement("i");
 bb4.setAttribute("class", "fa-solid fa-chess-bishop");
-bb4.style.color = "#403f3f";
+bb4.style.color = "#ffffffe1";
 
 let bb5 = document.createElement("i");
 bb5.setAttribute("class", "fa-solid fa-chess-bishop");
-bb5.style.color = "#403f3f";
+bb5.style.color = "#ffffffe1";
 
 let bb6 = document.createElement("i");
 bb6.setAttribute("class", "fa-solid fa-chess-bishop");
-bb6.style.color = "#403f3f";
+bb6.style.color = "#ffffffe1";
 
 let bb7 = document.createElement("i");
 bb7.setAttribute("class", "fa-solid fa-chess-bishop");
-bb7.style.color = "#403f3f";
+bb7.style.color = "#ffffffe1";
 
 let bb8 = document.createElement("i");
 bb8.setAttribute("class", "fa-solid fa-chess-bishop");
-bb8.style.color = "#403f3f";
+bb8.style.color = "#ffffffe1";
 
 let bb9 = document.createElement("i");
 bb9.setAttribute("class", "fa-solid fa-chess-bishop");
-bb9.style.color = "#403f3f";
+bb9.style.color = "#ffffffe1";
 
 let bb10 = document.createElement("i");
 bb10.setAttribute("class", "fa-solid fa-chess-bishop");
-bb10.style.color = "#403f3f";
+bb10.style.color = "#ffffffe1";
 
 // List of all bishops
 let bbl = [bb1, bb2, bb3, bb4, bb5, bb6, bb7, bb8, bb9,bb10];
 
 let br1 = document.createElement("i");
 br1.setAttribute("class", "fa-solid fa-chess-rook");
-br1.style.color = "#403f3f";
+br1.style.color = "#ffffffe1";
 
 let br2 = document.createElement("i");
 br2.setAttribute("class", "fa-solid fa-chess-rook");
-br2.style.color = "#403f3f";
+br2.style.color = "#ffffffe1";
 
 let br3 = document.createElement("i");
 br3.setAttribute("class", "fa-solid fa-chess-rook");
-br3.style.color = "#403f3f";
+br3.style.color = "#ffffffe1";
 
 let br4 = document.createElement("i");
 br4.setAttribute("class", "fa-solid fa-chess-rook");
-br4.style.color = "#403f3f";
+br4.style.color = "#ffffffe1";
 
 let br5 = document.createElement("i");
 br5.setAttribute("class", "fa-solid fa-chess-rook");
-br5.style.color = "#403f3f";
+br5.style.color = "#ffffffe1";
 
 let br6 = document.createElement("i");
 br6.setAttribute("class", "fa-solid fa-chess-rook");
-br6.style.color = "#403f3f";
+br6.style.color = "#ffffffe1";
 
 let br7 = document.createElement("i");
 br7.setAttribute("class", "fa-solid fa-chess-rook");
-br7.style.color = "#403f3f";
+br7.style.color = "#ffffffe1";
 
 let br8 = document.createElement("i");
 br8.setAttribute("class", "fa-solid fa-chess-rook");
-br8.style.color = "#403f3f";
+br8.style.color = "#ffffffe1";
 
 let br9 = document.createElement("i");
 br9.setAttribute("class", "fa-solid fa-chess-rook");
-br9.style.color = "#403f3f";
+br9.style.color = "#ffffffe1";
 
 let br10 = document.createElement("i");
 br10.setAttribute("class", "fa-solid fa-chess-rook");
-br10.style.color = "#403f3f";
+br10.style.color = "#ffffffe1";
 
 // List of all black rooks
 let brl = [br1, br2, br3, br4, br5, br6, br7, br8, br9,br10];
 
 let bk1 = document.createElement("i");
 bk1.setAttribute("class", "fa-solid fa-chess-knight");
-bk1.style.color = "#403f3f";
+bk1.style.color = "#ffffffe1";
 
 let bk2 = document.createElement("i");
 bk2.setAttribute("class", "fa-solid fa-chess-knight");
-bk2.style.color = "#403f3f";
+bk2.style.color = "#ffffffe1";
 
 let bk3 = document.createElement("i");
 bk3.setAttribute("class", "fa-solid fa-chess-knight");
-bk3.style.color = "#403f3f";
+bk3.style.color = "#ffffffe1";
 
 let bk4 = document.createElement("i");
 bk4.setAttribute("class", "fa-solid fa-chess-knight");
-bk4.style.color = "#403f3f";
+bk4.style.color = "#ffffffe1";
 
 let bk5 = document.createElement("i");
 bk5.setAttribute("class", "fa-solid fa-chess-knight");
-bk5.style.color = "#403f3f";
+bk5.style.color = "#ffffffe1";
 
 let bk6 = document.createElement("i");
 bk6.setAttribute("class", "fa-solid fa-chess-knight");
-bk6.style.color = "#403f3f";
+bk6.style.color = "#ffffffe1";
 
 let bk7 = document.createElement("i");
 bk7.setAttribute("class", "fa-solid fa-chess-knight");
-bk7.style.color = "#403f3f";
+bk7.style.color = "#ffffffe1";
 
 let bk8 = document.createElement("i");
 bk8.setAttribute("class", "fa-solid fa-chess-knight");
-bk8.style.color = "#403f3f";
+bk8.style.color = "#ffffffe1";
 
 let bk9 = document.createElement("i");
 bk9.setAttribute("class", "fa-solid fa-chess-knight");
-bk9.style.color = "#403f3f";
+bk9.style.color = "#ffffffe1";
 
 let bk10 = document.createElement("i");
 bk10.setAttribute("class", "fa-solid fa-chess-knight");
-bk10.style.color = "#403f3f";
+bk10.style.color = "#ffffffe1";
 
 // List of all black knights
 let bkl = [bk1, bk2, bk3, bk4, bk5, bk6, bk7, bk8, bk9,bk10];
@@ -214,35 +214,35 @@ let bkl = [bk1, bk2, bk3, bk4, bk5, bk6, bk7, bk8, bk9,bk10];
 
 let bp1 = document.createElement("i");
 bp1.setAttribute("class", "fa-solid fa-chess-pawn");
-bp1.style.color = '#403f3f';
+bp1.style.color = '#ffffffe1';
 g1e.append(bp1);
 let bp2 = document.createElement("i");
 bp2.setAttribute("class", "fa-solid fa-chess-pawn");
-bp2.style.color = '#403f3f';
+bp2.style.color = '#ffffffe1';
 g2e.append(bp2);
 let bp3 = document.createElement("i");
 bp3.setAttribute("class", "fa-solid fa-chess-pawn");
-bp3.style.color = '#403f3f';
+bp3.style.color = '#ffffffe1';
 g3e.append(bp3);
 let bp4 = document.createElement("i");
 bp4.setAttribute("class", "fa-solid fa-chess-pawn");
-bp4.style.color = '#403f3f';
+bp4.style.color = '#ffffffe1';
 g4e.append(bp4);
 let bp5 = document.createElement("i");
 bp5.setAttribute("class", "fa-solid fa-chess-pawn");
-bp5.style.color = '#403f3f';
+bp5.style.color = '#ffffffe1';
 g5e.append(bp5);
 let bp6 = document.createElement("i");
 bp6.setAttribute("class", "fa-solid fa-chess-pawn");
-bp6.style.color = '#403f3f';
+bp6.style.color = '#ffffffe1';
 g6e.append(bp6);
 let bp7 = document.createElement("i");
 bp7.setAttribute("class", "fa-solid fa-chess-pawn");
-bp7.style.color = '#403f3f';
+bp7.style.color = '#ffffffe1';
 g7e.append(bp7);
 let bp8 = document.createElement("i");
 bp8.setAttribute("class", "fa-solid fa-chess-pawn");
-bp8.style.color = '#403f3f';
+bp8.style.color = '#ffffffe1';
 g8e.append(bp8);
 
 h1e.append(br1);
@@ -250,11 +250,11 @@ h2e.append(bk1);
 h3e.append(bb1);
 let bq = document.createElement("i");
 bq.setAttribute("class", "fa-solid fa-chess-queen");
-bq.style.color = "#403f3f";
+bq.style.color = "#ffffffe1";
 h4e.append(bq1);
 let bk = document.createElement("i");
 bk.setAttribute("class", "fa-solid fa-chess-king");
-bk.style.color = "#403f3f";
+bk.style.color = "#ffffffe1";
 h5e.append(bk);
 
 h6e.append(bb2);
@@ -265,165 +265,165 @@ h8e.append(br2);
 
 let wq1 = document.createElement("i");
 wq1.setAttribute("class", "fa-solid fa-chess-queen");
-wq1.style.color = "#ffffffe1";
+wq1.style.color = "#403f3f";
 
 let wq2 = document.createElement("i");
 wq2.setAttribute("class", "fa-solid fa-chess-queen");
-wq2.style.color = "#ffffffe1";
+wq2.style.color = "#403f3f";
 
 let wq3 = document.createElement("i");
 wq3.setAttribute("class", "fa-solid fa-chess-queen");
-wq3.style.color = "#ffffffe1";
+wq3.style.color = "#403f3f";
 
 let wq4 = document.createElement("i");
 wq4.setAttribute("class", "fa-solid fa-chess-queen");
-wq4.style.color = "#ffffffe1";
+wq4.style.color = "#403f3f";
 
 let wq5 = document.createElement("i");
 wq5.setAttribute("class", "fa-solid fa-chess-queen");
-wq5.style.color = "#ffffffe1";
+wq5.style.color = "#403f3f";
 
 let wq6 = document.createElement("i");
 wq6.setAttribute("class", "fa-solid fa-chess-queen");
-wq6.style.color = "#ffffffe1";
+wq6.style.color = "#403f3f";
 
 let wq7 = document.createElement("i");
 wq7.setAttribute("class", "fa-solid fa-chess-queen");
-wq7.style.color = "#ffffffe1";
+wq7.style.color = "#403f3f";
 
 let wq8 = document.createElement("i");
 wq8.setAttribute("class", "fa-solid fa-chess-queen");
-wq8.style.color = "#ffffffe1";
+wq8.style.color = "#403f3f";
 let wq9 = document.createElement("i");
 wq9.setAttribute("class", "fa-solid fa-chess-queen");
-wq9.style.color = "#ffffffe1";
+wq9.style.color = "#403f3f";
 
 let wql = [wq1, wq2, wq3, wq4, wq5, wq6, wq7, wq8,wq9];
 
 let wb1 = document.createElement("i");
 wb1.setAttribute("class", "fa-solid fa-chess-bishop");
-wb1.style.color = "#ffffffe1";
+wb1.style.color = "#403f3f";
 
 let wb2 = document.createElement("i");
 wb2.setAttribute("class", "fa-solid fa-chess-bishop");
-wb2.style.color = "#ffffffe1";
+wb2.style.color = "#403f3f";
 
 let wb3 = document.createElement("i");
 wb3.setAttribute("class", "fa-solid fa-chess-bishop");
-wb3.style.color = "#ffffffe1";
+wb3.style.color = "#403f3f";
 
 let wb4 = document.createElement("i");
 wb4.setAttribute("class", "fa-solid fa-chess-bishop");
-wb4.style.color = "#ffffffe1";
+wb4.style.color = "#403f3f";
 
 let wb5 = document.createElement("i");
 wb5.setAttribute("class", "fa-solid fa-chess-bishop");
-wb5.style.color = "#ffffffe1";
+wb5.style.color = "#403f3f";
 
 let wb6 = document.createElement("i");
 wb6.setAttribute("class", "fa-solid fa-chess-bishop");
-wb6.style.color = "#ffffffe1";
+wb6.style.color = "#403f3f";
 
 let wb7 = document.createElement("i");
 wb7.setAttribute("class", "fa-solid fa-chess-bishop");
-wb7.style.color = "#ffffffe1";
+wb7.style.color = "#403f3f";
 
 let wb8 = document.createElement("i");
 wb8.setAttribute("class", "fa-solid fa-chess-bishop");
-wb8.style.color = "#ffffffe1";
+wb8.style.color = "#403f3f";
 
 let wb9 = document.createElement("i");
 wb9.setAttribute("class", "fa-solid fa-chess-bishop");
-wb9.style.color = "#ffffffe1";
+wb9.style.color = "#403f3f";
 
 let wb10 = document.createElement("i");
 wb10.setAttribute("class", "fa-solid fa-chess-bishop");
-wb10.style.color = "#ffffffe1";
+wb10.style.color = "#403f3f";
 
 let wbl = [wb1, wb2, wb3, wb4, wb5, wb6, wb7, wb8, wb9];
 
 
 let wr1 = document.createElement("i");
 wr1.setAttribute("class", "fa-solid fa-chess-rook");
-wr1.style.color = "#ffffffe1";
+wr1.style.color = "#403f3f";
 
 let wr2 = document.createElement("i");
 wr2.setAttribute("class", "fa-solid fa-chess-rook");
-wr2.style.color = "#ffffffe1";
+wr2.style.color = "#403f3f";
 
 let wr3 = document.createElement("i");
 wr3.setAttribute("class", "fa-solid fa-chess-rook");
-wr3.style.color = "#ffffffe1";
+wr3.style.color = "#403f3f";
 
 let wr4 = document.createElement("i");
 wr4.setAttribute("class", "fa-solid fa-chess-rook");
-wr4.style.color = "#ffffffe1";
+wr4.style.color = "#403f3f";
 
 let wr5 = document.createElement("i");
 wr5.setAttribute("class", "fa-solid fa-chess-rook");
-wr5.style.color = "#ffffffe1";
+wr5.style.color = "#403f3f";
 
 let wr6 = document.createElement("i");
 wr6.setAttribute("class", "fa-solid fa-chess-rook");
-wr6.style.color = "#ffffffe1";
+wr6.style.color = "#403f3f";
 
 let wr7 = document.createElement("i");
 wr7.setAttribute("class", "fa-solid fa-chess-rook");
-wr7.style.color = "#ffffffe1";
+wr7.style.color = "#403f3f";
 
 let wr8 = document.createElement("i");
 wr8.setAttribute("class", "fa-solid fa-chess-rook");
-wr8.style.color = "#ffffffe1";
+wr8.style.color = "#403f3f";
 
 let wr9 = document.createElement("i");
 wr9.setAttribute("class", "fa-solid fa-chess-rook");
-wr9.style.color = "#ffffffe1";
+wr9.style.color = "#403f3f";
 
 let wr10 = document.createElement("i");
 wr10.setAttribute("class", "fa-solid fa-chess-rook");
-wr10.style.color = "#ffffffe1";
+wr10.style.color = "#403f3f";
 
 let wrl = [wr1, wr2, wr3, wr4, wr5, wr6, wr7, wr8, wr9,wr10];
 
 let wk1 = document.createElement("i");
 wk1.setAttribute("class", "fa-solid fa-chess-knight");
-wk1.style.color = "#ffffffe1";
+wk1.style.color = "#403f3f";
 
 let wk2 = document.createElement("i");
 wk2.setAttribute("class", "fa-solid fa-chess-knight");
-wk2.style.color = "#ffffffe1";
+wk2.style.color = "#403f3f";
 
 let wk3 = document.createElement("i");
 wk3.setAttribute("class", "fa-solid fa-chess-knight");
-wk3.style.color = "#ffffffe1";
+wk3.style.color = "#403f3f";
 
 let wk4 = document.createElement("i");
 wk4.setAttribute("class", "fa-solid fa-chess-knight");
-wk4.style.color = "#ffffffe1";
+wk4.style.color = "#403f3f";
 
 let wk5 = document.createElement("i");
 wk5.setAttribute("class", "fa-solid fa-chess-knight");
-wk5.style.color = "#ffffffe1";
+wk5.style.color = "#403f3f";
 
 let wk6 = document.createElement("i");
 wk6.setAttribute("class", "fa-solid fa-chess-knight");
-wk6.style.color = "#ffffffe1";
+wk6.style.color = "#403f3f";
 
 let wk7 = document.createElement("i");
 wk7.setAttribute("class", "fa-solid fa-chess-knight");
-wk7.style.color = "#ffffffe1";
+wk7.style.color = "#403f3f";
 
 let wk8 = document.createElement("i");
 wk8.setAttribute("class", "fa-solid fa-chess-knight");
-wk8.style.color = "#ffffffe1";
+wk8.style.color = "#403f3f";
 
 let wk9 = document.createElement("i");
 wk9.setAttribute("class", "fa-solid fa-chess-knight");
-wk9.style.color = "#ffffffe1";
+wk9.style.color = "#403f3f";
 
 let wk10 = document.createElement("i");
 wk10.setAttribute("class", "fa-solid fa-chess-knight");
-wk10.style.color = "#ffffffe1";
+wk10.style.color = "#403f3f";
 
 let wkl = [wk1, wk2, wk3, wk4, wk5, wk6, wk7, wk8, wk9,wk10];
 
@@ -431,35 +431,35 @@ let wkl = [wk1, wk2, wk3, wk4, wk5, wk6, wk7, wk8, wk9,wk10];
 
 let wp1 = document.createElement("i");
 wp1.setAttribute("class", "fa-solid fa-chess-pawn");
-wp1.style.color = '#ffffffe1';
+wp1.style.color = '#403f3f';
 b1e.append(wp1);
 let wp2 = document.createElement("i");
 wp2.setAttribute("class", "fa-solid fa-chess-pawn");
-wp2.style.color = '#ffffffe1';
+wp2.style.color = '#403f3f';
 b2e.append(wp2);
 let wp3 = document.createElement("i");
 wp3.setAttribute("class", "fa-solid fa-chess-pawn");
-wp3.style.color = '#ffffffe1';
+wp3.style.color = '#403f3f';
 b3e.append(wp3);
 let wp4 = document.createElement("i");
 wp4.setAttribute("class", "fa-solid fa-chess-pawn");
-wp4.style.color = '#ffffffe1';
+wp4.style.color = '#403f3f';
 b4e.append(wp4);
 let wp5 = document.createElement("i");
 wp5.setAttribute("class", "fa-solid fa-chess-pawn");
-wp5.style.color = '#ffffffe1';
+wp5.style.color = '#403f3f';
 b5e.append(wp5);
 let wp6 = document.createElement("i");
 wp6.setAttribute("class", "fa-solid fa-chess-pawn");
-wp6.style.color = '#ffffffe1';
+wp6.style.color = '#403f3f';
 b6e.append(wp6);
 let wp7 = document.createElement("i");
 wp7.setAttribute("class", "fa-solid fa-chess-pawn");
-wp7.style.color = '#ffffffe1';
+wp7.style.color = '#403f3f';
 b7e.append(wp7);
 let wp8 = document.createElement("i");
 wp8.setAttribute("class", "fa-solid fa-chess-pawn");
-wp8.style.color = '#ffffffe1';
+wp8.style.color = '#403f3f';
 b8e.append(wp8);
 
 
@@ -469,7 +469,7 @@ a3e.append(wb1);
 a4e.append(wq1);
 let wk = document.createElement("i");
 wk.setAttribute("class", "fa-solid fa-chess-king");
-wk.style.color = "#ffffffe1";
+wk.style.color = "#403f3f";
 a5e.append(wk);
 a6e.append(wb2);
 a7e.append(wk2);
